@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+- Nothing yet.
+
+## [0.1.1] - 2026-09-02
+
+- Added automated GitHub Release creation for SemVer tags.
+- Added manual PyPI publishing through GitHub Actions.
+- Added release-tag validation before publishing.
+
 ## [0.1.0] - 2026-09-02
 
 - First public release.
