@@ -8,6 +8,10 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 - Nothing yet.
 
+## [0.1.3] - 2026-09-02
+
+- Fixed manual release recovery to run the current top-level workflow against a selected tag.
+
 ## [0.1.2] - 2026-09-02
 
 - Added a top-level release workflow that creates GitHub Releases and publishes distributions to PyPI.

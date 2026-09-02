@@ -5,6 +5,13 @@ on:
     tags:
       - "v*"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to publish
+        required: true
+
+env:
+  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
 
 jobs:
   release:
@@ -12,30 +19,54 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      package_name: ${{ steps.metadata.outputs.package_name }}
 
     steps:
       - name: Check out tagged commit
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ env.RELEASE_TAG }}
+
+      - name: Read package metadata
+        id: metadata
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+
+          with open("pyproject.toml", "rb") as project_file:
+              project = tomllib.load(project_file)["project"]
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output_file:
+              print(f"package_name={project['name']}", file=output_file)
+              print(f"package_version={project['version']}", file=output_file)
+          PY
 
       - name: Validate SemVer tag
+        env:
+          PACKAGE_VERSION: ${{ steps.metadata.outputs.package_version }}
         run: |
-          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "${RELEASE_TAG#v}" == "$PACKAGE_VERSION" ]]
 
       - name: Verify tagged commit is on main
         run: |
           git fetch origin main --no-tags
-          git merge-base --is-ancestor "$GITHUB_SHA" origin/main
+          tag_sha=$(git rev-list -n 1 "$RELEASE_TAG")
+          git merge-base --is-ancestor "$tag_sha" origin/main
 
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
+          PACKAGE_NAME: ${{ steps.metadata.outputs.package_name }}
         run: |
-          if ! gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release create "$GITHUB_REF_NAME" \
-              --target "$GITHUB_SHA" \
-              --title "stashapp-client ${GITHUB_REF_NAME#v}" \
+          tag_sha=$(git rev-list -n 1 "$RELEASE_TAG")
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" \
+              --target "$tag_sha" \
+              --title "$PACKAGE_NAME ${RELEASE_TAG#v}" \
               --generate-notes
           fi
 
@@ -45,12 +76,14 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    outputs:
+      package_name: ${{ needs.release.outputs.package_name }}
 
     steps:
       - name: Check out tagged commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ env.RELEASE_TAG }}
           persist-credentials: false
 
       - name: Set up Python
@@ -79,7 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/stashapp-client
+      url: https://pypi.org/p/${{ needs.build.outputs.package_name }}
     permissions:
       id-token: write
 
