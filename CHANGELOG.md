@@ -10,7 +10,7 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [0.1.2] - 2026-09-02
 
-- Connected automated GitHub Releases directly to the reusable PyPI publishing workflow.
+- Added a top-level release workflow that creates GitHub Releases and publishes distributions to PyPI.
 - Made automated release creation safe to rerun for an existing tag.
 
 ## [0.1.1] - 2026-09-02
