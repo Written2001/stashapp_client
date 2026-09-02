@@ -1,0 +1,10 @@
+__pycache__
+.venv
+.pytest_cache
+build/
+dist/
+.stash_credentials
+.stashdb_credentials
+*.ipynb
+*.pem
+*.egg-info/

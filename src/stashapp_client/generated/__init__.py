@@ -1,0 +1,1 @@
+"""Generated GraphQL operation metadata."""
