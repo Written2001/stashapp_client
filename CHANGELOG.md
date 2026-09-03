@@ -4,6 +4,11 @@ All notable changes to this project are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.1.6] - 2026-09-03
+
+- Simplified the README to provide a concise package introduction and links to
+	the full MkDocs documentation.
+
 ## [0.1.5] - 2026-09-03
 
 - Fixed nested response field selection when the requested path crosses a
