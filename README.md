@@ -25,6 +25,9 @@ python -m pip install -e '.[dev]'
 Releases follow [Semantic Versioning](https://semver.org/). See
 [`CHANGELOG.md`](CHANGELOG.md) for release history.
 
+Read the full documentation at
+<https://written2001.github.io/stashapp_client/>.
+
 ## Connect
 
 Create a credentials file containing the GraphQL URL and API key on separate lines:

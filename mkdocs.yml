@@ -1,0 +1,71 @@
+site_name: stashapp-client
+site_description: SDL-first Python client for the Stash GraphQL API
+site_url: https://written2001.github.io/stashapp_client/
+repo_url: https://github.com/Written2001/stashapp_client
+repo_name: Written2001/stashapp_client
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            members_order: source
+            show_source: false
+            show_root_heading: true
+            show_signature_annotations: true
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: getting-started/installation.md
+      - Connect to Stash: getting-started/connection.md
+      - First query: getting-started/first-query.md
+  - User guide:
+      - Queries and filters: guide/queries-and-filters.md
+      - Responses and DataFrames: guide/responses-and-dataframes.md
+      - Pagination: guide/pagination.md
+      - Mutations: guide/mutations.md
+      - Schema compatibility: guide/schema-compatibility.md
+      - Troubleshooting: guide/troubleshooting.md
+  - API reference:
+      - Client: reference/client.md
+      - Filters and criteria: reference/filters.md
+      - Responses and errors: reference/responses.md
+      - Mutation plans: reference/mutations.md
+  - Development:
+      - Contributing: development/contributing.md
+      - Schema generation: development/schema-generation.md
+      - Releases: development/releases.md
+      - Changelog: changelog.md

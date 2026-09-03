@@ -28,6 +28,7 @@ def bind_registry(client: Any, registry: dict[str, Any]) -> None:
 
 
 def load_and_bind(client: Any, path: str) -> None:
+    """Load a generated registry from ``path`` and bind it to ``client``."""
     bind_registry(client, load_registry(path))
 
 

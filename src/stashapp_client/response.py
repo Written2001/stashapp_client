@@ -13,7 +13,12 @@ def extract_response(
     response: str = "data",
     field: str | list[str] | None = None,
 ) -> Any:
-    """Extract a GraphQL response according to the public response contract."""
+    """Extract a GraphQL envelope as data, an object, or raw JSON.
+
+    In data mode, list-of-dictionary results become DataFrames and GraphQL
+    errors raise ``GraphQLError``. Object mode preserves ``data`` alongside
+    non-data metadata, while raw mode returns the envelope unchanged.
+    """
     if response not in {"data", "object", "raw"}:
         raise ValueError("response must be 'data', 'object', or 'raw'")
     if not isinstance(envelope, dict) or "data" not in envelope and "errors" not in envelope:

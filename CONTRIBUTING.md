@@ -18,6 +18,14 @@ Run the checks before opening a pull request:
 .venv/bin/ruff check src tools tests
 ```
 
+Build the documentation locally when changing `docs/` or `mkdocs.yml`:
+
+```bash
+python -m pip install -e '.[docs]'
+mkdocs serve
+mkdocs build --strict
+```
+
 The GitHub Actions workflow also builds a wheel, validates its metadata, and installs it into a clean virtual environment.
 
 Do not commit credentials, certificates, virtual environments, notebooks, caches, build output, or `*.egg-info` directories. The repository ignores these files by default.

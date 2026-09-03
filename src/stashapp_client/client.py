@@ -27,6 +27,16 @@ class StashClient:
         session: Session | None = None,
         registry_path: str | os.PathLike[str] | None = None,
     ) -> None:
+        """Create a client and bind operations from a generated registry.
+
+        Args:
+            url: Stash GraphQL endpoint URL.
+            api_key: API key sent in the ``ApiKey`` request header.
+            verify: TLS verification setting or a CA bundle path.
+            timeout: HTTP request timeout in seconds.
+            session: Optional requests-compatible session, useful for testing.
+            registry_path: Optional path to a generated operations registry.
+        """
         if not url:
             raise ValueError("url is required")
         if not api_key:
@@ -49,6 +59,7 @@ class StashClient:
         timeout: float = 30,
         **kwargs: Any,
     ) -> "StashClient":  # noqa: UP037
+        """Create a client from URL and API-key lines in a credentials file."""
         lines = Path(path).read_text(encoding="utf-8").splitlines()
         values = [line.strip() for line in lines if line.strip()]
         if len(values) < 2:
@@ -61,6 +72,7 @@ class StashClient:
     def from_env(
         cls, *, verify: bool | str = True, timeout: float = 30, **kwargs: Any
     ) -> "StashClient":  # noqa: UP037
+        """Create a client from ``STASH_URL`` and ``STASH_API_KEY``."""
         configured_verify = os.environ.get("STASHAPI_TLS_VERIFY")
         if configured_verify is not None:
             verify = _parse_verify(configured_verify)
@@ -80,7 +92,21 @@ class StashClient:
         response: str = "data",
         field: str | list[str] | None = None,
     ) -> Any:
-        """Execute a GraphQL document and extract its result."""
+        """Execute a GraphQL document and select the requested result shape.
+
+        Args:
+            query: GraphQL document to send to the endpoint.
+            variables: Optional GraphQL variables mapping.
+            response: ``data`` for extracted values, ``object`` for data plus
+                metadata, or ``raw`` for the complete GraphQL envelope.
+            field: Optional response path, as a dotted string component or list
+                of components.
+
+        Raises:
+            TransportError: The HTTP request or TLS connection failed.
+            StashResponseError: The server returned invalid JSON or structure.
+            GraphQLError: The envelope contains GraphQL errors in data mode.
+        """
         try:
             result = self.session.post(
                 self.url,
@@ -100,7 +126,7 @@ class StashClient:
         return extract_response(envelope, response=response, field=field)
 
     def has_connection(self) -> bool:
-        """Return whether the endpoint accepts a minimal GraphQL request."""
+        """Validate the endpoint with a minimal GraphQL request."""
         try:
             self.execute("query ConnectionCheck { __typename }")
         except Exception as exc:
@@ -108,12 +134,15 @@ class StashClient:
         return True
 
     def close(self) -> None:
+        """Close the underlying HTTP session."""
         self.session.close()
 
     def __enter__(self) -> "StashClient":  # noqa: PYI034, UP037
+        """Return this client for use in a context manager."""
         return self
 
     def __exit__(self, *args: object) -> None:
+        """Close the client when leaving a context manager."""
         self.close()
 
 

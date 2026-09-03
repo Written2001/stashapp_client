@@ -10,7 +10,11 @@ def validate_input_value(
     path: str | None = None,
     type_string: str | None = None,
 ) -> Any:
-    """Validate a GraphQL input value against generated input metadata."""
+    """Validate a GraphQL input against generated type and field metadata.
+
+    The validator checks unknown fields, required fields, nested input objects,
+    and list nullability before a request is sent.
+    """
     if name not in input_fields:
         raise KeyError(f"unknown GraphQL input object: {name}")
     location = path or name

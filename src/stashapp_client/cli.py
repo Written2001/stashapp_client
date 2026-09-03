@@ -60,6 +60,7 @@ def _parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> None:
+    """Run the schema generation or schema comparison command-line interface."""
     args = _parser().parse_args(argv)
     if args.command == "build-ops":
         _write_artifacts(

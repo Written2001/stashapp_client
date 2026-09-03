@@ -9,7 +9,7 @@ DEFAULT_PAGE_SIZE = 100
 
 
 def should_auto_paginate(filter_value: Any, *, response: str = "data") -> bool:
-    """Return whether a filter requests all pages in data mode."""
+    """Return whether ``per_page=-1`` requests automatic pagination in data mode."""
     return response == "data" and isinstance(filter_value, dict) and filter_value.get("per_page") == -1
 
 
@@ -20,7 +20,11 @@ def paginate(
     page_size: int = DEFAULT_PAGE_SIZE,
     count: int | None = None,
 ) -> Any:
-    """Fetch and merge pages until the known count or a short page is reached."""
+    """Fetch and merge pages until the count or a short page is reached.
+
+    ``fetch_page`` receives the page number and page size and should return a
+    list, tuple, DataFrame, or another result type that can be merged.
+    """
     if start_page < 1:
         raise ValueError("start_page must be at least 1")
     if page_size < 1:

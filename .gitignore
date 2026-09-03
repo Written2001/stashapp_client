@@ -9,3 +9,4 @@ dist/
 *.ipynb
 *.pem
 *.egg-info/
+site/

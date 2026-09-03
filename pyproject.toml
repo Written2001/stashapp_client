@@ -23,14 +23,18 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.10",
 ]
+docs = [
+    "mkdocs-material>=9.7",
+    "mkdocstrings[python]>=0.29",
+]
 
 [project.scripts]
 stashapp-client = "stashapp_client.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/Written2001/stash_client"
-Repository = "https://github.com/Written2001/stash_client"
-Issues = "https://github.com/Written2001/stash_client/issues"
+Homepage = "https://github.com/Written2001/stashapp_client"
+Repository = "https://github.com/Written2001/stashapp_client"
+Issues = "https://github.com/Written2001/stashapp_client/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

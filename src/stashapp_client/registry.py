@@ -8,6 +8,7 @@ from typing import Any
 
 
 def load_registry(path: str | Path) -> dict[str, Any]:
+    """Load and minimally validate a generated registry JSON file."""
     value = json.loads(Path(path).read_text(encoding="utf-8"))
     if not isinstance(value, dict) or not isinstance(value.get("operations"), list):
         raise TypeError("registry must contain an operations list")
@@ -44,6 +45,7 @@ def build_registry(schema: dict[str, Any]) -> dict[str, Any]:
 
 
 def save_registry(registry: dict[str, Any], path: str | Path) -> None:
+    """Write a registry as deterministic, readable JSON."""
     Path(path).write_text(json.dumps(registry, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 

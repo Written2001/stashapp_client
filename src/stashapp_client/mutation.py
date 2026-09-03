@@ -11,6 +11,7 @@ import pandas as pd
 
 @dataclass(frozen=True)
 class MutationEntry:
+    """One normalized mutation input and its original plan position."""
     index: int
     input: dict[str, Any]
     omitted: tuple[str, ...] = ()
@@ -18,6 +19,7 @@ class MutationEntry:
 
 @dataclass
 class MutationPlan:
+    """A batch of normalized mutation entries that can be previewed or run."""
     entries: list[MutationEntry]
     operation: str | None = None
 
@@ -29,7 +31,14 @@ class MutationPlan:
         on_error: str = "stop",
         argument: str = "input",
     ) -> dict[str, Any]:
-        """Execute one mutation per plan entry, or return a dry-run preview."""
+        """Execute one mutation per entry, or return a dry-run preview.
+
+        Args:
+            mutate: Callable accepting the selected mutation argument.
+            dry_run: Return planned entries without invoking ``mutate``.
+            on_error: Stop at the first failure or continue through the plan.
+            argument: Keyword name receiving each normalized input.
+        """
         if on_error not in {"stop", "continue"}:
             raise ValueError("on_error must be 'stop' or 'continue'")
         results: list[dict[str, Any]] = []
@@ -61,7 +70,11 @@ def prepare_mutations(
     null: str = "omit",
     operation: str | None = None,
 ) -> MutationPlan:
-    """Build normalized mutation inputs without making network requests."""
+    """Build normalized mutation inputs without making network requests.
+
+    ``build_input`` receives each row and its one-based index. Missing values
+    can be omitted or rejected independently for pandas NA values and ``None``.
+    """
     if na not in {"omit", "error"} or null not in {"omit", "error"}:
         raise ValueError("na and null must be 'omit' or 'error'")
     entries: list[MutationEntry] = []
