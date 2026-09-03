@@ -3,18 +3,25 @@
 from typing import Any
 
 from .errors import StashResponseError
+from .generated.inputs import INPUT_FIELDS
 
-_FIELDS = {
-    "find": {"q", "page", "per_page", "sort", "direction"},
-    "scene": {"id", "title", "date", "details", "organized", "rating100", "duration", "tags", "performers", "studios", "performers_filter", "studios_filter", "AND", "OR", "NOT"},
-    "image": {"id", "path", "rating100", "organized", "date", "galleries", "studios", "tags", "performers", "AND", "OR", "NOT"},
-    "gallery": {"id", "title", "date", "organized", "rating100", "has_chapters", "performers", "studios", "tags", "AND", "OR", "NOT"},
-    "performer": {"id", "name", "gender", "country", "rating100", "image_count", "stash_id", "stash_id_endpoint", "AND", "OR", "NOT"},
-    "studio": {"id", "name", "url", "favorite", "scene_count", "image_count", "stash_id", "stash_id_endpoint", "AND", "OR", "NOT"},
-    "tag": {"id", "name", "favorite", "scene_count", "image_count", "stash_id", "AND", "OR", "NOT"},
-    "group": {"id", "name", "rating100", "scene_count", "performers", "studios", "tags", "AND", "OR", "NOT"},
-    "marker": {"id", "title", "seconds", "duration", "scene_id", "tags", "AND", "OR", "NOT"},
+_FILTER_TYPES = {
+    "find": "FindFilterType",
+    "scene": "SceneFilterType",
+    "image": "ImageFilterType",
+    "gallery": "GalleryFilterType",
+    "performer": "PerformerFilterType",
+    "studio": "StudioFilterType",
+    "tag": "TagFilterType",
+    "group": "GroupFilterType",
+    "marker": "SceneMarkerFilterType",
 }
+_FIELDS = {
+    kind: set(INPUT_FIELDS[input_name]) for kind, input_name in _FILTER_TYPES.items()
+}
+_FIELDS["performer"].add("stash_id")
+_FIELDS["studio"].add("stash_id")
+_FIELDS["tag"].add("stash_id")
 
 
 def _build(kind: str, values: dict[str, Any], *, strict: bool) -> dict[str, Any]:
