@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.1.7] - 2026-09-03
+
+- Added explicit nested fragment overrides for fields with unreliable GraphQL
+	nullability at runtime, including folders and basic files.
+- Preserved complete default `find*` result fragments while applying compact
+	selections only to nested relationships.
+- Added regression coverage for nested fragment overrides and full default
+	result selections.
+
 ## [0.1.6] - 2026-09-03
 
 - Simplified the README to provide a concise package introduction and links to

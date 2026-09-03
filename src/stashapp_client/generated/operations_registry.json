@@ -6963,27 +6963,27 @@
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allGalleries { allGalleries { ...Gallery } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }",
+      "document": "query allGalleries { allGalleries { ...Gallery } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }",
       "fragment_name": "Gallery",
       "kind": "query",
       "name": "allGalleries",
       "result_type": "Gallery",
-      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name } cover { id title } paths { __typename } custom_fields"
+      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { __typename } custom_fields"
     },
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allImages { allImages { ...Image } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { ...Tag } performers { id name } custom_fields }",
+      "document": "query allImages { allImages { ...Image } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }",
       "fragment_name": "Image",
       "kind": "query",
       "name": "allImages",
       "result_type": "Image",
-      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name } custom_fields"
+      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields"
     },
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allMovies { allMovies { ...Movie } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
+      "document": "query allMovies { allMovies { ...Movie } }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
       "fragment_name": "Movie",
       "kind": "query",
       "name": "allMovies",
@@ -6993,7 +6993,7 @@
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allPerformers { allPerformers { ...Performer } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
+      "document": "query allPerformers { allPerformers { ...Performer } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
       "fragment_name": "Performer",
       "kind": "query",
       "name": "allPerformers",
@@ -7003,7 +7003,7 @@
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allSceneMarkers { allSceneMarkers { ...SceneMarker } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }",
+      "document": "query allSceneMarkers { allSceneMarkers { ...SceneMarker } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }",
       "fragment_name": "SceneMarker",
       "kind": "query",
       "name": "allSceneMarkers",
@@ -7013,17 +7013,17 @@
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allScenes { allScenes { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "query allScenes { allScenes { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "query",
       "name": "allScenes",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allStudios { allStudios { ...Studio } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { ...Tag } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { ...StashID } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
+      "document": "query allStudios { allStudios { ...Studio } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
       "fragment_name": "Studio",
       "kind": "query",
       "name": "allStudios",
@@ -7033,7 +7033,7 @@
     {
       "arguments": [],
       "default_field": null,
-      "document": "query allTags { allTags { ...Tag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
+      "document": "query allTags { allTags { ...Tag } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
       "fragment_name": "Tag",
       "kind": "query",
       "name": "allTags",
@@ -7093,12 +7093,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkGalleryUpdate($input: BulkGalleryUpdateInput!) { bulkGalleryUpdate(input: $input) { ...Gallery } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }",
+      "document": "mutation bulkGalleryUpdate($input: BulkGalleryUpdateInput!) { bulkGalleryUpdate(input: $input) { ...Gallery } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }",
       "fragment_name": "Gallery",
       "kind": "mutation",
       "name": "bulkGalleryUpdate",
       "result_type": "Gallery",
-      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name } cover { id title } paths { __typename } custom_fields"
+      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { __typename } custom_fields"
     },
     {
       "arguments": [
@@ -7108,7 +7108,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkGroupUpdate($input: BulkGroupUpdateInput!) { bulkGroupUpdate(input: $input) { ...Group } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
+      "document": "mutation bulkGroupUpdate($input: BulkGroupUpdateInput!) { bulkGroupUpdate(input: $input) { ...Group } }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
       "fragment_name": "Group",
       "kind": "mutation",
       "name": "bulkGroupUpdate",
@@ -7123,12 +7123,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkImageUpdate($input: BulkImageUpdateInput!) { bulkImageUpdate(input: $input) { ...Image } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { ...Tag } performers { id name } custom_fields }",
+      "document": "mutation bulkImageUpdate($input: BulkImageUpdateInput!) { bulkImageUpdate(input: $input) { ...Image } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }",
       "fragment_name": "Image",
       "kind": "mutation",
       "name": "bulkImageUpdate",
       "result_type": "Image",
-      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name } custom_fields"
+      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields"
     },
     {
       "arguments": [
@@ -7138,7 +7138,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkMovieUpdate($input: BulkMovieUpdateInput!) { bulkMovieUpdate(input: $input) { ...Movie } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
+      "document": "mutation bulkMovieUpdate($input: BulkMovieUpdateInput!) { bulkMovieUpdate(input: $input) { ...Movie } }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
       "fragment_name": "Movie",
       "kind": "mutation",
       "name": "bulkMovieUpdate",
@@ -7153,7 +7153,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkPerformerUpdate($input: BulkPerformerUpdateInput!) { bulkPerformerUpdate(input: $input) { ...Performer } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
+      "document": "mutation bulkPerformerUpdate($input: BulkPerformerUpdateInput!) { bulkPerformerUpdate(input: $input) { ...Performer } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
       "fragment_name": "Performer",
       "kind": "mutation",
       "name": "bulkPerformerUpdate",
@@ -7168,7 +7168,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkSceneMarkerUpdate($input: BulkSceneMarkerUpdateInput!) { bulkSceneMarkerUpdate(input: $input) { ...SceneMarker } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }",
+      "document": "mutation bulkSceneMarkerUpdate($input: BulkSceneMarkerUpdateInput!) { bulkSceneMarkerUpdate(input: $input) { ...SceneMarker } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }",
       "fragment_name": "SceneMarker",
       "kind": "mutation",
       "name": "bulkSceneMarkerUpdate",
@@ -7183,12 +7183,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkSceneUpdate($input: BulkSceneUpdateInput!) { bulkSceneUpdate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "mutation bulkSceneUpdate($input: BulkSceneUpdateInput!) { bulkSceneUpdate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "mutation",
       "name": "bulkSceneUpdate",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -7198,7 +7198,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkStudioUpdate($input: BulkStudioUpdateInput!) { bulkStudioUpdate(input: $input) { ...Studio } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { ...Tag } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { ...StashID } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
+      "document": "mutation bulkStudioUpdate($input: BulkStudioUpdateInput!) { bulkStudioUpdate(input: $input) { ...Studio } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
       "fragment_name": "Studio",
       "kind": "mutation",
       "name": "bulkStudioUpdate",
@@ -7213,7 +7213,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation bulkTagUpdate($input: BulkTagUpdateInput!) { bulkTagUpdate(input: $input) { ...Tag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
+      "document": "mutation bulkTagUpdate($input: BulkTagUpdateInput!) { bulkTagUpdate(input: $input) { ...Tag } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
       "fragment_name": "Tag",
       "kind": "mutation",
       "name": "bulkTagUpdate",
@@ -7530,12 +7530,12 @@
         }
       ],
       "default_field": null,
-      "document": "query findDuplicateScenes($distance: Int, $duration_diff: Float) { findDuplicateScenes(distance: $distance, duration_diff: $duration_diff) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "query findDuplicateScenes($distance: Int, $duration_diff: Float) { findDuplicateScenes(distance: $distance, duration_diff: $duration_diff) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "query",
       "name": "findDuplicateScenes",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -7549,7 +7549,7 @@
         }
       ],
       "default_field": null,
-      "document": "query findFile($id: ID, $path: String) { findFile(id: $id, path: $path) { ...BaseFile } }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment BaseFile on BaseFile { ...BasicFile ...VideoFile ...ImageFile ...GalleryFile }",
+      "document": "query findFile($id: ID, $path: String) { findFile(id: $id, path: $path) { ...BaseFile } }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment BaseFile on BaseFile { ...BasicFile ...VideoFile ...ImageFile ...GalleryFile }",
       "fragment_name": "BaseFile",
       "kind": "query",
       "name": "findFile",
@@ -7572,12 +7572,12 @@
         }
       ],
       "default_field": "files",
-      "document": "query findFiles($file_filter: FileFilterType, $filter: FindFilterType, $ids: [ID!]) { findFiles(file_filter: $file_filter, filter: $filter, ids: $ids) { ...FindFilesResultType } }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment BaseFile on BaseFile { ...BasicFile ...VideoFile ...ImageFile ...GalleryFile }\nfragment FindFilesResultType on FindFilesResultType { count megapixels duration size files { ...BaseFile } }",
+      "document": "query findFiles($file_filter: FileFilterType, $filter: FindFilterType, $ids: [ID!]) { findFiles(file_filter: $file_filter, filter: $filter, ids: $ids) { ...FindFilesResultType } }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment BaseFile on BaseFile { ...BasicFile ...VideoFile ...ImageFile ...GalleryFile }\nfragment FindFilesResultType on FindFilesResultType { count megapixels duration size files { ...BaseFile } }",
       "fragment_name": "FindFilesResultType",
       "kind": "query",
       "name": "findFiles",
       "result_type": "FindFilesResultType",
-      "selection": "count megapixels duration size files { id path basename }"
+      "selection": "count megapixels duration size files { ...BaseFile }"
     },
     {
       "arguments": [
@@ -7619,7 +7619,7 @@
       "kind": "query",
       "name": "findFolders",
       "result_type": "FindFoldersResultType",
-      "selection": "count folders { id path basename }"
+      "selection": "count folders { ...Folder }"
     },
     {
       "arguments": [
@@ -7637,12 +7637,12 @@
         }
       ],
       "default_field": "galleries",
-      "document": "query findGalleries($gallery_filter: GalleryFilterType, $filter: FindFilterType, $ids: [ID!]) { findGalleries(gallery_filter: $gallery_filter, filter: $filter, ids: $ids) { ...FindGalleriesResultType } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }\nfragment FindGalleriesResultType on FindGalleriesResultType { count galleries { ...Gallery } }",
+      "document": "query findGalleries($gallery_filter: GalleryFilterType, $filter: FindFilterType, $ids: [ID!]) { findGalleries(gallery_filter: $gallery_filter, filter: $filter, ids: $ids) { ...FindGalleriesResultType } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }\nfragment FindGalleriesResultType on FindGalleriesResultType { count galleries { ...Gallery } }",
       "fragment_name": "FindGalleriesResultType",
       "kind": "query",
       "name": "findGalleries",
       "result_type": "FindGalleriesResultType",
-      "selection": "count galleries { id title }"
+      "selection": "count galleries { ...Gallery }"
     },
     {
       "arguments": [
@@ -7652,12 +7652,12 @@
         }
       ],
       "default_field": null,
-      "document": "query findGallery($id: ID!) { findGallery(id: $id) { ...Gallery } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }",
+      "document": "query findGallery($id: ID!) { findGallery(id: $id) { ...Gallery } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }",
       "fragment_name": "Gallery",
       "kind": "query",
       "name": "findGallery",
       "result_type": "Gallery",
-      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name } cover { id title } paths { __typename } custom_fields"
+      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { __typename } custom_fields"
     },
     {
       "arguments": [
@@ -7667,7 +7667,7 @@
         }
       ],
       "default_field": null,
-      "document": "query findGroup($id: ID!) { findGroup(id: $id) { ...Group } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
+      "document": "query findGroup($id: ID!) { findGroup(id: $id) { ...Group } }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
       "fragment_name": "Group",
       "kind": "query",
       "name": "findGroup",
@@ -7690,12 +7690,12 @@
         }
       ],
       "default_field": "groups",
-      "document": "query findGroups($group_filter: GroupFilterType, $filter: FindFilterType, $ids: [ID!]) { findGroups(group_filter: $group_filter, filter: $filter, ids: $ids) { ...FindGroupsResultType } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }\nfragment FindGroupsResultType on FindGroupsResultType { count groups { ...Group } }",
+      "document": "query findGroups($group_filter: GroupFilterType, $filter: FindFilterType, $ids: [ID!]) { findGroups(group_filter: $group_filter, filter: $filter, ids: $ids) { ...FindGroupsResultType } }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }\nfragment FindGroupsResultType on FindGroupsResultType { count groups { ...Group } }",
       "fragment_name": "FindGroupsResultType",
       "kind": "query",
       "name": "findGroups",
       "result_type": "FindGroupsResultType",
-      "selection": "count groups { id name }"
+      "selection": "count groups { ...Group }"
     },
     {
       "arguments": [
@@ -7709,12 +7709,12 @@
         }
       ],
       "default_field": null,
-      "document": "query findImage($id: ID, $checksum: String) { findImage(id: $id, checksum: $checksum) { ...Image } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { ...Tag } performers { id name } custom_fields }",
+      "document": "query findImage($id: ID, $checksum: String) { findImage(id: $id, checksum: $checksum) { ...Image } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }",
       "fragment_name": "Image",
       "kind": "query",
       "name": "findImage",
       "result_type": "Image",
-      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name } custom_fields"
+      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields"
     },
     {
       "arguments": [
@@ -7736,12 +7736,12 @@
         }
       ],
       "default_field": "images",
-      "document": "query findImages($image_filter: ImageFilterType, $image_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findImages(image_filter: $image_filter, image_ids: $image_ids, ids: $ids, filter: $filter) { ...FindImagesResultType } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { ...Tag } performers { id name } custom_fields }\nfragment FindImagesResultType on FindImagesResultType { count megapixels filesize images { ...Image } }",
+      "document": "query findImages($image_filter: ImageFilterType, $image_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findImages(image_filter: $image_filter, image_ids: $image_ids, ids: $ids, filter: $filter) { ...FindImagesResultType } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }\nfragment FindImagesResultType on FindImagesResultType { count megapixels filesize images { ...Image } }",
       "fragment_name": "FindImagesResultType",
       "kind": "query",
       "name": "findImages",
       "result_type": "FindImagesResultType",
-      "selection": "count megapixels filesize images { id title }"
+      "selection": "count megapixels filesize images { ...Image }"
     },
     {
       "arguments": [
@@ -7766,7 +7766,7 @@
         }
       ],
       "default_field": null,
-      "document": "query findMovie($id: ID!) { findMovie(id: $id) { ...Movie } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
+      "document": "query findMovie($id: ID!) { findMovie(id: $id) { ...Movie } }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
       "fragment_name": "Movie",
       "kind": "query",
       "name": "findMovie",
@@ -7789,12 +7789,12 @@
         }
       ],
       "default_field": "movies",
-      "document": "query findMovies($movie_filter: MovieFilterType, $filter: FindFilterType, $ids: [ID!]) { findMovies(movie_filter: $movie_filter, filter: $filter, ids: $ids) { ...FindMoviesResultType } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }\nfragment FindMoviesResultType on FindMoviesResultType { count movies { ...Movie } }",
+      "document": "query findMovies($movie_filter: MovieFilterType, $filter: FindFilterType, $ids: [ID!]) { findMovies(movie_filter: $movie_filter, filter: $filter, ids: $ids) { ...FindMoviesResultType } }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }\nfragment FindMoviesResultType on FindMoviesResultType { count movies { ...Movie } }",
       "fragment_name": "FindMoviesResultType",
       "kind": "query",
       "name": "findMovies",
       "result_type": "FindMoviesResultType",
-      "selection": "count movies { id name }"
+      "selection": "count movies { ...Movie }"
     },
     {
       "arguments": [
@@ -7804,7 +7804,7 @@
         }
       ],
       "default_field": null,
-      "document": "query findPerformer($id: ID!) { findPerformer(id: $id) { ...Performer } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
+      "document": "query findPerformer($id: ID!) { findPerformer(id: $id) { ...Performer } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
       "fragment_name": "Performer",
       "kind": "query",
       "name": "findPerformer",
@@ -7831,12 +7831,12 @@
         }
       ],
       "default_field": "performers",
-      "document": "query findPerformers($performer_filter: PerformerFilterType, $filter: FindFilterType, $performer_ids: [Int!], $ids: [ID!]) { findPerformers(performer_filter: $performer_filter, filter: $filter, performer_ids: $performer_ids, ids: $ids) { ...FindPerformersResultType } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }\nfragment FindPerformersResultType on FindPerformersResultType { count performers { ...Performer } }",
+      "document": "query findPerformers($performer_filter: PerformerFilterType, $filter: FindFilterType, $performer_ids: [Int!], $ids: [ID!]) { findPerformers(performer_filter: $performer_filter, filter: $filter, performer_ids: $performer_ids, ids: $ids) { ...FindPerformersResultType } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }\nfragment FindPerformersResultType on FindPerformersResultType { count performers { ...Performer } }",
       "fragment_name": "FindPerformersResultType",
       "kind": "query",
       "name": "findPerformers",
       "result_type": "FindPerformersResultType",
-      "selection": "count performers { id name }"
+      "selection": "count performers { ...Performer }"
     },
     {
       "arguments": [
@@ -7880,12 +7880,12 @@
         }
       ],
       "default_field": null,
-      "document": "query findScene($id: ID, $checksum: String) { findScene(id: $id, checksum: $checksum) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "query findScene($id: ID, $checksum: String) { findScene(id: $id, checksum: $checksum) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "query",
       "name": "findScene",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -7895,12 +7895,12 @@
         }
       ],
       "default_field": null,
-      "document": "query findSceneByHash($input: SceneHashInput!) { findSceneByHash(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "query findSceneByHash($input: SceneHashInput!) { findSceneByHash(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "query",
       "name": "findSceneByHash",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -7918,12 +7918,12 @@
         }
       ],
       "default_field": "scene_markers",
-      "document": "query findSceneMarkers($scene_marker_filter: SceneMarkerFilterType, $filter: FindFilterType, $ids: [ID!]) { findSceneMarkers(scene_marker_filter: $scene_marker_filter, filter: $filter, ids: $ids) { ...FindSceneMarkersResultType } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }\nfragment FindSceneMarkersResultType on FindSceneMarkersResultType { count scene_markers { ...SceneMarker } }",
+      "document": "query findSceneMarkers($scene_marker_filter: SceneMarkerFilterType, $filter: FindFilterType, $ids: [ID!]) { findSceneMarkers(scene_marker_filter: $scene_marker_filter, filter: $filter, ids: $ids) { ...FindSceneMarkersResultType } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }\nfragment FindSceneMarkersResultType on FindSceneMarkersResultType { count scene_markers { ...SceneMarker } }",
       "fragment_name": "FindSceneMarkersResultType",
       "kind": "query",
       "name": "findSceneMarkers",
       "result_type": "FindSceneMarkersResultType",
-      "selection": "count scene_markers { id title }"
+      "selection": "count scene_markers { ...SceneMarker }"
     },
     {
       "arguments": [
@@ -7945,12 +7945,12 @@
         }
       ],
       "default_field": "scenes",
-      "document": "query findScenes($scene_filter: SceneFilterType, $scene_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findScenes(scene_filter: $scene_filter, scene_ids: $scene_ids, ids: $ids, filter: $filter) { ...FindScenesResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { ...Scene } }",
+      "document": "query findScenes($scene_filter: SceneFilterType, $scene_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findScenes(scene_filter: $scene_filter, scene_ids: $scene_ids, ids: $ids, filter: $filter) { ...FindScenesResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { ...Scene } }",
       "fragment_name": "FindScenesResultType",
       "kind": "query",
       "name": "findScenes",
       "result_type": "FindScenesResultType",
-      "selection": "count duration filesize scenes { id title }"
+      "selection": "count duration filesize scenes { ...Scene }"
     },
     {
       "arguments": [
@@ -7960,12 +7960,12 @@
         }
       ],
       "default_field": "scenes",
-      "document": "query findScenesByPathRegex($filter: FindFilterType) { findScenesByPathRegex(filter: $filter) { ...FindScenesResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { ...Scene } }",
+      "document": "query findScenesByPathRegex($filter: FindFilterType) { findScenesByPathRegex(filter: $filter) { ...FindScenesResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { ...Scene } }",
       "fragment_name": "FindScenesResultType",
       "kind": "query",
       "name": "findScenesByPathRegex",
       "result_type": "FindScenesResultType",
-      "selection": "count duration filesize scenes { id title }"
+      "selection": "count duration filesize scenes { ...Scene }"
     },
     {
       "arguments": [
@@ -7975,7 +7975,7 @@
         }
       ],
       "default_field": null,
-      "document": "query findStudio($id: ID!) { findStudio(id: $id) { ...Studio } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { ...Tag } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { ...StashID } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
+      "document": "query findStudio($id: ID!) { findStudio(id: $id) { ...Studio } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
       "fragment_name": "Studio",
       "kind": "query",
       "name": "findStudio",
@@ -7998,12 +7998,12 @@
         }
       ],
       "default_field": "studios",
-      "document": "query findStudios($studio_filter: StudioFilterType, $filter: FindFilterType, $ids: [ID!]) { findStudios(studio_filter: $studio_filter, filter: $filter, ids: $ids) { ...FindStudiosResultType } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { ...Tag } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { ...StashID } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }\nfragment FindStudiosResultType on FindStudiosResultType { count studios { ...Studio } }",
+      "document": "query findStudios($studio_filter: StudioFilterType, $filter: FindFilterType, $ids: [ID!]) { findStudios(studio_filter: $studio_filter, filter: $filter, ids: $ids) { ...FindStudiosResultType } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }\nfragment FindStudiosResultType on FindStudiosResultType { count studios { ...Studio } }",
       "fragment_name": "FindStudiosResultType",
       "kind": "query",
       "name": "findStudios",
       "result_type": "FindStudiosResultType",
-      "selection": "count studios { id name }"
+      "selection": "count studios { ...Studio }"
     },
     {
       "arguments": [
@@ -8013,7 +8013,7 @@
         }
       ],
       "default_field": null,
-      "document": "query findTag($id: ID!) { findTag(id: $id) { ...Tag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
+      "document": "query findTag($id: ID!) { findTag(id: $id) { ...Tag } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
       "fragment_name": "Tag",
       "kind": "query",
       "name": "findTag",
@@ -8036,12 +8036,12 @@
         }
       ],
       "default_field": "tags",
-      "document": "query findTags($tag_filter: TagFilterType, $filter: FindFilterType, $ids: [ID!]) { findTags(tag_filter: $tag_filter, filter: $filter, ids: $ids) { ...FindTagsResultType } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment FindTagsResultType on FindTagsResultType { count tags { ...Tag } }",
+      "document": "query findTags($tag_filter: TagFilterType, $filter: FindFilterType, $ids: [ID!]) { findTags(tag_filter: $tag_filter, filter: $filter, ids: $ids) { ...FindTagsResultType } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment FindTagsResultType on FindTagsResultType { count tags { ...Tag } }",
       "fragment_name": "FindTagsResultType",
       "kind": "query",
       "name": "findTags",
       "result_type": "FindTagsResultType",
-      "selection": "count tags { id name }"
+      "selection": "count tags { ...Tag }"
     },
     {
       "arguments": [
@@ -8051,12 +8051,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation galleriesUpdate($input: [GalleryUpdateInput!]!) { galleriesUpdate(input: $input) { ...Gallery } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }",
+      "document": "mutation galleriesUpdate($input: [GalleryUpdateInput!]!) { galleriesUpdate(input: $input) { ...Gallery } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }",
       "fragment_name": "Gallery",
       "kind": "mutation",
       "name": "galleriesUpdate",
       "result_type": "Gallery",
-      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name } cover { id title } paths { __typename } custom_fields"
+      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { __typename } custom_fields"
     },
     {
       "arguments": [
@@ -8109,12 +8109,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation galleryCreate($input: GalleryCreateInput!) { galleryCreate(input: $input) { ...Gallery } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }",
+      "document": "mutation galleryCreate($input: GalleryCreateInput!) { galleryCreate(input: $input) { ...Gallery } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }",
       "fragment_name": "Gallery",
       "kind": "mutation",
       "name": "galleryCreate",
       "result_type": "Gallery",
-      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name } cover { id title } paths { __typename } custom_fields"
+      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { __typename } custom_fields"
     },
     {
       "arguments": [
@@ -8137,12 +8137,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation galleryUpdate($input: GalleryUpdateInput!) { galleryUpdate(input: $input) { ...Gallery } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { ...Folder } chapters { id title } scenes { id title } studio { id name } image_count tags { ...Tag } performers { id name } cover { id title } paths { ...GalleryPathsType } custom_fields }",
+      "document": "mutation galleryUpdate($input: GalleryUpdateInput!) { galleryUpdate(input: $input) { ...Gallery } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }",
       "fragment_name": "Gallery",
       "kind": "mutation",
       "name": "galleryUpdate",
       "result_type": "Gallery",
-      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name } cover { id title } paths { __typename } custom_fields"
+      "selection": "id title code urls date details photographer rating100 organized created_at updated_at files { id path basename } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { __typename } custom_fields"
     },
     {
       "arguments": [
@@ -8165,7 +8165,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation groupCreate($input: GroupCreateInput!) { groupCreate(input: $input) { ...Group } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
+      "document": "mutation groupCreate($input: GroupCreateInput!) { groupCreate(input: $input) { ...Group } }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
       "fragment_name": "Group",
       "kind": "mutation",
       "name": "groupCreate",
@@ -8193,7 +8193,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation groupUpdate($input: GroupUpdateInput!) { groupUpdate(input: $input) { ...Group } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
+      "document": "mutation groupUpdate($input: GroupUpdateInput!) { groupUpdate(input: $input) { ...Group } }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }",
       "fragment_name": "Group",
       "kind": "mutation",
       "name": "groupUpdate",
@@ -8273,12 +8273,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation imageUpdate($input: ImageUpdateInput!) { imageUpdate(input: $input) { ...Image } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { ...Tag } performers { id name } custom_fields }",
+      "document": "mutation imageUpdate($input: ImageUpdateInput!) { imageUpdate(input: $input) { ...Image } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }",
       "fragment_name": "Image",
       "kind": "mutation",
       "name": "imageUpdate",
       "result_type": "Image",
-      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name } custom_fields"
+      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields"
     },
     {
       "arguments": [
@@ -8301,12 +8301,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation imagesUpdate($input: [ImageUpdateInput!]!) { imagesUpdate(input: $input) { ...Image } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { ...Tag } performers { id name } custom_fields }",
+      "document": "mutation imagesUpdate($input: [ImageUpdateInput!]!) { imagesUpdate(input: $input) { ...Image } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }",
       "fragment_name": "Image",
       "kind": "mutation",
       "name": "imagesUpdate",
       "result_type": "Image",
-      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name } custom_fields"
+      "selection": "id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { __typename } paths { __typename } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields"
     },
     {
       "arguments": [
@@ -8425,7 +8425,7 @@
         }
       ],
       "default_field": null,
-      "document": "query markerWall($q: String) { markerWall(q: $q) { ...SceneMarker } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }",
+      "document": "query markerWall($q: String) { markerWall(q: $q) { ...SceneMarker } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }",
       "fragment_name": "SceneMarker",
       "kind": "query",
       "name": "markerWall",
@@ -8594,7 +8594,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation movieCreate($input: MovieCreateInput!) { movieCreate(input: $input) { ...Movie } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
+      "document": "mutation movieCreate($input: MovieCreateInput!) { movieCreate(input: $input) { ...Movie } }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
       "fragment_name": "Movie",
       "kind": "mutation",
       "name": "movieCreate",
@@ -8622,7 +8622,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation movieUpdate($input: MovieUpdateInput!) { movieUpdate(input: $input) { ...Movie } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { ...Tag } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
+      "document": "mutation movieUpdate($input: MovieUpdateInput!) { movieUpdate(input: $input) { ...Movie } }\nfragment Movie on Movie { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at front_image_path back_image_path scene_count scenes { id title } }",
       "fragment_name": "Movie",
       "kind": "mutation",
       "name": "movieUpdate",
@@ -8662,12 +8662,12 @@
         }
       ],
       "default_field": "results",
-      "document": "query parseSceneFilenames($filter: FindFilterType, $config: SceneParserInput!) { parseSceneFilenames(filter: $filter, config: $config) { ...SceneParserResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment SceneMovieID on SceneMovieID { movie_id scene_index }\nfragment SceneParserResult on SceneParserResult { scene { ...Scene } title code details director url date rating100 studio_id gallery_ids performer_ids movies { ...SceneMovieID } tag_ids }\nfragment SceneParserResultType on SceneParserResultType { count results { ...SceneParserResult } }",
+      "document": "query parseSceneFilenames($filter: FindFilterType, $config: SceneParserInput!) { parseSceneFilenames(filter: $filter, config: $config) { ...SceneParserResultType } }\nfragment SceneMovieID on SceneMovieID { movie_id scene_index }\nfragment SceneParserResult on SceneParserResult { scene { id title } title code details director url date rating100 studio_id gallery_ids performer_ids movies { ...SceneMovieID } tag_ids }\nfragment SceneParserResultType on SceneParserResultType { count results { ...SceneParserResult } }",
       "fragment_name": "SceneParserResultType",
       "kind": "query",
       "name": "parseSceneFilenames",
       "result_type": "SceneParserResultType",
-      "selection": "count results { title }"
+      "selection": "count results { ...SceneParserResult }"
     },
     {
       "arguments": [
@@ -8677,7 +8677,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation performerCreate($input: PerformerCreateInput!) { performerCreate(input: $input) { ...Performer } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
+      "document": "mutation performerCreate($input: PerformerCreateInput!) { performerCreate(input: $input) { ...Performer } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
       "fragment_name": "Performer",
       "kind": "mutation",
       "name": "performerCreate",
@@ -8705,7 +8705,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation performerMerge($input: PerformerMergeInput!) { performerMerge(input: $input) { ...Performer } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
+      "document": "mutation performerMerge($input: PerformerMergeInput!) { performerMerge(input: $input) { ...Performer } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
       "fragment_name": "Performer",
       "kind": "mutation",
       "name": "performerMerge",
@@ -8720,7 +8720,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation performerUpdate($input: PerformerUpdateInput!) { performerUpdate(input: $input) { ...Performer } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { ...Tag } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { ...StashID } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
+      "document": "mutation performerUpdate($input: PerformerUpdateInput!) { performerUpdate(input: $input) { ...Performer } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }",
       "fragment_name": "Performer",
       "kind": "mutation",
       "name": "performerUpdate",
@@ -9006,12 +9006,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation sceneCreate($input: SceneCreateInput!) { sceneCreate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "mutation sceneCreate($input: SceneCreateInput!) { sceneCreate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "mutation",
       "name": "sceneCreate",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -9128,7 +9128,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation sceneMarkerCreate($input: SceneMarkerCreateInput!) { sceneMarkerCreate(input: $input) { ...SceneMarker } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }",
+      "document": "mutation sceneMarkerCreate($input: SceneMarkerCreateInput!) { sceneMarkerCreate(input: $input) { ...SceneMarker } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }",
       "fragment_name": "SceneMarker",
       "kind": "mutation",
       "name": "sceneMarkerCreate",
@@ -9156,7 +9156,7 @@
         }
       ],
       "default_field": null,
-      "document": "query sceneMarkerTags($scene_id: ID!) { sceneMarkerTags(scene_id: $scene_id) { ...SceneMarkerTag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }\nfragment SceneMarkerTag on SceneMarkerTag { tag { ...Tag } scene_markers { ...SceneMarker } }",
+      "document": "query sceneMarkerTags($scene_id: ID!) { sceneMarkerTags(scene_id: $scene_id) { ...SceneMarkerTag } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }\nfragment SceneMarkerTag on SceneMarkerTag { tag { id name } scene_markers { ...SceneMarker } }",
       "fragment_name": "SceneMarkerTag",
       "kind": "query",
       "name": "sceneMarkerTags",
@@ -9171,7 +9171,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation sceneMarkerUpdate($input: SceneMarkerUpdateInput!) { sceneMarkerUpdate(input: $input) { ...SceneMarker } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { ...Tag } tags { ...Tag } created_at updated_at stream preview screenshot }",
+      "document": "mutation sceneMarkerUpdate($input: SceneMarkerUpdateInput!) { sceneMarkerUpdate(input: $input) { ...SceneMarker } }\nfragment SceneMarker on SceneMarker { id scene { id title } title seconds end_seconds primary_tag { id name } tags { id name } created_at updated_at stream preview screenshot }",
       "fragment_name": "SceneMarker",
       "kind": "mutation",
       "name": "sceneMarkerUpdate",
@@ -9199,12 +9199,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation sceneMerge($input: SceneMergeInput!) { sceneMerge(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "mutation sceneMerge($input: SceneMergeInput!) { sceneMerge(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "mutation",
       "name": "sceneMerge",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -9297,12 +9297,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation sceneUpdate($input: SceneUpdateInput!) { sceneUpdate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "mutation sceneUpdate($input: SceneUpdateInput!) { sceneUpdate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "mutation",
       "name": "sceneUpdate",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -9312,12 +9312,12 @@
         }
       ],
       "default_field": null,
-      "document": "query sceneWall($q: String) { sceneWall(q: $q) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "query sceneWall($q: String) { sceneWall(q: $q) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "query",
       "name": "sceneWall",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -9340,12 +9340,12 @@
         }
       ],
       "default_field": null,
-      "document": "mutation scenesUpdate($input: [SceneUpdateInput!]!) { scenesUpdate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment Fingerprint on Fingerprint { type value }\nfragment BasicFile on BasicFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment VideoFile on VideoFile { id path basename parent_folder { ...Folder } zip_file { ...BasicFile } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { ...Tag } performers { id name } stash_ids { ...StashID } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
+      "document": "mutation scenesUpdate($input: [SceneUpdateInput!]!) { scenesUpdate(input: $input) { ...Scene } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }",
       "fragment_name": "Scene",
       "kind": "mutation",
       "name": "scenesUpdate",
       "result_type": "Scene",
-      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
+      "selection": "id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { __typename } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { id path basename } paths { __typename } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { __typename }"
     },
     {
       "arguments": [
@@ -9355,12 +9355,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeGalleryURL($url: String!) { scrapeGalleryURL(url: $url) { ...ScrapedGallery } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGallery on ScrapedGallery { title code details photographer urls date studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } }",
+      "document": "query scrapeGalleryURL($url: String!) { scrapeGalleryURL(url: $url) { ...ScrapedGallery } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGallery on ScrapedGallery { title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } }",
       "fragment_name": "ScrapedGallery",
       "kind": "query",
       "name": "scrapeGalleryURL",
       "result_type": "ScrapedGallery",
-      "selection": "title code details photographer urls date studio { name stored_id } tags { name stored_id } performers { name stored_id }"
+      "selection": "title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id }"
     },
     {
       "arguments": [
@@ -9370,12 +9370,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeGroupURL($url: String!) { scrapeGroupURL(url: $url) { ...ScrapedGroup } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }",
+      "document": "query scrapeGroupURL($url: String!) { scrapeGroupURL(url: $url) { ...ScrapedGroup } }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }",
       "fragment_name": "ScrapedGroup",
       "kind": "query",
       "name": "scrapeGroupURL",
       "result_type": "ScrapedGroup",
-      "selection": "stored_id name aliases duration date rating director urls synopsis studio { name stored_id } tags { name stored_id } front_image back_image"
+      "selection": "stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image"
     },
     {
       "arguments": [
@@ -9385,12 +9385,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeImageURL($url: String!) { scrapeImageURL(url: $url) { ...ScrapedImage } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedImage on ScrapedImage { title code details photographer urls date studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } }",
+      "document": "query scrapeImageURL($url: String!) { scrapeImageURL(url: $url) { ...ScrapedImage } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedImage on ScrapedImage { title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } }",
       "fragment_name": "ScrapedImage",
       "kind": "query",
       "name": "scrapeImageURL",
       "result_type": "ScrapedImage",
-      "selection": "title code details photographer urls date studio { name stored_id } tags { name stored_id } performers { name stored_id }"
+      "selection": "title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id }"
     },
     {
       "arguments": [
@@ -9400,12 +9400,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeMovieURL($url: String!) { scrapeMovieURL(url: $url) { ...ScrapedMovie } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedMovie on ScrapedMovie { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }",
+      "document": "query scrapeMovieURL($url: String!) { scrapeMovieURL(url: $url) { ...ScrapedMovie } }\nfragment ScrapedMovie on ScrapedMovie { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }",
       "fragment_name": "ScrapedMovie",
       "kind": "query",
       "name": "scrapeMovieURL",
       "result_type": "ScrapedMovie",
-      "selection": "stored_id name aliases duration date rating director urls synopsis studio { name stored_id } tags { name stored_id } front_image back_image"
+      "selection": "stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image"
     },
     {
       "arguments": [
@@ -9419,12 +9419,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeMultiPerformers($source: ScraperSourceInput!, $input: ScrapeMultiPerformersInput!) { scrapeMultiPerformers(source: $source, input: $input) { ...ScrapedPerformer } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }",
+      "document": "query scrapeMultiPerformers($source: ScraperSourceInput!, $input: ScrapeMultiPerformersInput!) { scrapeMultiPerformers(source: $source, input: $input) { ...ScrapedPerformer } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }",
       "fragment_name": "ScrapedPerformer",
       "kind": "query",
       "name": "scrapeMultiPerformers",
       "result_type": "ScrapedPerformer",
-      "selection": "stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { name stored_id } images details death_date hair_color weight remote_site_id"
+      "selection": "stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id"
     },
     {
       "arguments": [
@@ -9438,12 +9438,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeMultiScenes($source: ScraperSourceInput!, $input: ScrapeMultiScenesInput!) { scrapeMultiScenes(source: $source, input: $input) { ...ScrapedScene } }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }",
+      "document": "query scrapeMultiScenes($source: ScraperSourceInput!, $input: ScrapeMultiScenesInput!) { scrapeMultiScenes(source: $source, input: $input) { ...ScrapedScene } }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }",
       "fragment_name": "ScrapedScene",
       "kind": "query",
       "name": "scrapeMultiScenes",
       "result_type": "ScrapedScene",
-      "selection": "title code details director urls date image file { __typename } studio { name stored_id } tags { name stored_id } performers { name stored_id } groups { name stored_id } remote_site_id duration fingerprints { __typename }"
+      "selection": "title code details director urls date image file { __typename } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id } groups { name stored_id } remote_site_id duration fingerprints { __typename }"
     },
     {
       "arguments": [
@@ -9453,12 +9453,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapePerformerURL($url: String!) { scrapePerformerURL(url: $url) { ...ScrapedPerformer } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }",
+      "document": "query scrapePerformerURL($url: String!) { scrapePerformerURL(url: $url) { ...ScrapedPerformer } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }",
       "fragment_name": "ScrapedPerformer",
       "kind": "query",
       "name": "scrapePerformerURL",
       "result_type": "ScrapedPerformer",
-      "selection": "stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { name stored_id } images details death_date hair_color weight remote_site_id"
+      "selection": "stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id"
     },
     {
       "arguments": [
@@ -9468,12 +9468,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSceneURL($url: String!) { scrapeSceneURL(url: $url) { ...ScrapedScene } }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }",
+      "document": "query scrapeSceneURL($url: String!) { scrapeSceneURL(url: $url) { ...ScrapedScene } }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }",
       "fragment_name": "ScrapedScene",
       "kind": "query",
       "name": "scrapeSceneURL",
       "result_type": "ScrapedScene",
-      "selection": "title code details director urls date image file { __typename } studio { name stored_id } tags { name stored_id } performers { name stored_id } groups { name stored_id } remote_site_id duration fingerprints { __typename }"
+      "selection": "title code details director urls date image file { __typename } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id } groups { name stored_id } remote_site_id duration fingerprints { __typename }"
     },
     {
       "arguments": [
@@ -9487,12 +9487,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleGallery($source: ScraperSourceInput!, $input: ScrapeSingleGalleryInput!) { scrapeSingleGallery(source: $source, input: $input) { ...ScrapedGallery } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGallery on ScrapedGallery { title code details photographer urls date studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } }",
+      "document": "query scrapeSingleGallery($source: ScraperSourceInput!, $input: ScrapeSingleGalleryInput!) { scrapeSingleGallery(source: $source, input: $input) { ...ScrapedGallery } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGallery on ScrapedGallery { title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } }",
       "fragment_name": "ScrapedGallery",
       "kind": "query",
       "name": "scrapeSingleGallery",
       "result_type": "ScrapedGallery",
-      "selection": "title code details photographer urls date studio { name stored_id } tags { name stored_id } performers { name stored_id }"
+      "selection": "title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id }"
     },
     {
       "arguments": [
@@ -9506,12 +9506,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleGroup($source: ScraperSourceInput!, $input: ScrapeSingleGroupInput!) { scrapeSingleGroup(source: $source, input: $input) { ...ScrapedGroup } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }",
+      "document": "query scrapeSingleGroup($source: ScraperSourceInput!, $input: ScrapeSingleGroupInput!) { scrapeSingleGroup(source: $source, input: $input) { ...ScrapedGroup } }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }",
       "fragment_name": "ScrapedGroup",
       "kind": "query",
       "name": "scrapeSingleGroup",
       "result_type": "ScrapedGroup",
-      "selection": "stored_id name aliases duration date rating director urls synopsis studio { name stored_id } tags { name stored_id } front_image back_image"
+      "selection": "stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image"
     },
     {
       "arguments": [
@@ -9525,12 +9525,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleImage($source: ScraperSourceInput!, $input: ScrapeSingleImageInput!) { scrapeSingleImage(source: $source, input: $input) { ...ScrapedImage } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedImage on ScrapedImage { title code details photographer urls date studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } }",
+      "document": "query scrapeSingleImage($source: ScraperSourceInput!, $input: ScrapeSingleImageInput!) { scrapeSingleImage(source: $source, input: $input) { ...ScrapedImage } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedImage on ScrapedImage { title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } }",
       "fragment_name": "ScrapedImage",
       "kind": "query",
       "name": "scrapeSingleImage",
       "result_type": "ScrapedImage",
-      "selection": "title code details photographer urls date studio { name stored_id } tags { name stored_id } performers { name stored_id }"
+      "selection": "title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id }"
     },
     {
       "arguments": [
@@ -9544,12 +9544,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleMovie($source: ScraperSourceInput!, $input: ScrapeSingleMovieInput!) { scrapeSingleMovie(source: $source, input: $input) { ...ScrapedMovie } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedMovie on ScrapedMovie { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }",
+      "document": "query scrapeSingleMovie($source: ScraperSourceInput!, $input: ScrapeSingleMovieInput!) { scrapeSingleMovie(source: $source, input: $input) { ...ScrapedMovie } }\nfragment ScrapedMovie on ScrapedMovie { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }",
       "fragment_name": "ScrapedMovie",
       "kind": "query",
       "name": "scrapeSingleMovie",
       "result_type": "ScrapedMovie",
-      "selection": "stored_id name aliases duration date rating director urls synopsis studio { name stored_id } tags { name stored_id } front_image back_image"
+      "selection": "stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image"
     },
     {
       "arguments": [
@@ -9563,12 +9563,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSinglePerformer($source: ScraperSourceInput!, $input: ScrapeSinglePerformerInput!) { scrapeSinglePerformer(source: $source, input: $input) { ...ScrapedPerformer } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }",
+      "document": "query scrapeSinglePerformer($source: ScraperSourceInput!, $input: ScrapeSinglePerformerInput!) { scrapeSinglePerformer(source: $source, input: $input) { ...ScrapedPerformer } }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }",
       "fragment_name": "ScrapedPerformer",
       "kind": "query",
       "name": "scrapeSinglePerformer",
       "result_type": "ScrapedPerformer",
-      "selection": "stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { name stored_id } images details death_date hair_color weight remote_site_id"
+      "selection": "stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id"
     },
     {
       "arguments": [
@@ -9582,12 +9582,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleScene($source: ScraperSourceInput!, $input: ScrapeSingleSceneInput!) { scrapeSingleScene(source: $source, input: $input) { ...ScrapedScene } }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }",
+      "document": "query scrapeSingleScene($source: ScraperSourceInput!, $input: ScrapeSingleSceneInput!) { scrapeSingleScene(source: $source, input: $input) { ...ScrapedScene } }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }",
       "fragment_name": "ScrapedScene",
       "kind": "query",
       "name": "scrapeSingleScene",
       "result_type": "ScrapedScene",
-      "selection": "title code details director urls date image file { __typename } studio { name stored_id } tags { name stored_id } performers { name stored_id } groups { name stored_id } remote_site_id duration fingerprints { __typename }"
+      "selection": "title code details director urls date image file { __typename } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { name stored_id } groups { name stored_id } remote_site_id duration fingerprints { __typename }"
     },
     {
       "arguments": [
@@ -9601,12 +9601,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleStudio($source: ScraperSourceInput!, $input: ScrapeSingleStudioInput!) { scrapeSingleStudio(source: $source, input: $input) { ...ScrapedStudio } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }",
+      "document": "query scrapeSingleStudio($source: ScraperSourceInput!, $input: ScrapeSingleStudioInput!) { scrapeSingleStudio(source: $source, input: $input) { ...ScrapedStudio } }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { stored_id name } image details aliases tags { stored_id name description alias_list remote_site_id } remote_site_id }",
       "fragment_name": "ScrapedStudio",
       "kind": "query",
       "name": "scrapeSingleStudio",
       "result_type": "ScrapedStudio",
-      "selection": "stored_id name urls parent { name stored_id } image details aliases tags { name stored_id } remote_site_id"
+      "selection": "stored_id name urls parent { stored_id name } image details aliases tags { stored_id name description alias_list remote_site_id } remote_site_id"
     },
     {
       "arguments": [
@@ -9620,12 +9620,12 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeSingleTag($source: ScraperSourceInput!, $input: ScrapeSingleTagInput!) { scrapeSingleTag(source: $source, input: $input) { ...ScrapedTag } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }",
+      "document": "query scrapeSingleTag($source: ScraperSourceInput!, $input: ScrapeSingleTagInput!) { scrapeSingleTag(source: $source, input: $input) { ...ScrapedTag } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { stored_id name description alias_list remote_site_id } remote_site_id }",
       "fragment_name": "ScrapedTag",
       "kind": "query",
       "name": "scrapeSingleTag",
       "result_type": "ScrapedTag",
-      "selection": "stored_id name description alias_list parent { name stored_id } remote_site_id"
+      "selection": "stored_id name description alias_list parent { stored_id name description alias_list remote_site_id } remote_site_id"
     },
     {
       "arguments": [
@@ -9639,7 +9639,7 @@
         }
       ],
       "default_field": null,
-      "document": "query scrapeURL($url: String!, $ty: ScrapeContentType!) { scrapeURL(url: $url, ty: $ty) { ...ScrapedContent } }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { name stored_id } remote_site_id }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { name stored_id } image details aliases tags { ...ScrapedTag } remote_site_id }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { ...ScrapedTag } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }\nfragment ScrapedGallery on ScrapedGallery { title code details photographer urls date studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } }\nfragment ScrapedImage on ScrapedImage { title code details photographer urls date studio { ...ScrapedStudio } tags { ...ScrapedTag } performers { ...ScrapedPerformer } }\nfragment ScrapedMovie on ScrapedMovie { stored_id name aliases duration date rating director urls synopsis studio { ...ScrapedStudio } tags { ...ScrapedTag } front_image back_image }\nfragment ScrapedContent on ScrapedContent { ...ScrapedStudio ...ScrapedTag ...ScrapedScene ...ScrapedGallery ...ScrapedImage ...ScrapedMovie ...ScrapedGroup ...ScrapedPerformer }",
+      "document": "query scrapeURL($url: String!, $ty: ScrapeContentType!) { scrapeURL(url: $url, ty: $ty) { ...ScrapedContent } }\nfragment ScrapedStudio on ScrapedStudio { stored_id name urls parent { stored_id name } image details aliases tags { stored_id name description alias_list remote_site_id } remote_site_id }\nfragment ScrapedTag on ScrapedTag { stored_id name description alias_list parent { stored_id name description alias_list remote_site_id } remote_site_id }\nfragment SceneFileType on SceneFileType { size duration video_codec audio_codec width height framerate bitrate }\nfragment ScrapedPerformer on ScrapedPerformer { stored_id name disambiguation gender urls birthdate ethnicity country eye_color height measurements fake_tits penis_length circumcised career_start career_end tattoos piercings aliases tags { stored_id name description alias_list remote_site_id } images details death_date hair_color weight remote_site_id }\nfragment ScrapedGroup on ScrapedGroup { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }\nfragment StashBoxFingerprint on StashBoxFingerprint { algorithm hash duration }\nfragment ScrapedScene on ScrapedScene { title code details director urls date image file { ...SceneFileType } studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } groups { ...ScrapedGroup } remote_site_id duration fingerprints { ...StashBoxFingerprint } }\nfragment ScrapedGallery on ScrapedGallery { title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } }\nfragment ScrapedImage on ScrapedImage { title code details photographer urls date studio { stored_id name } tags { stored_id name description alias_list remote_site_id } performers { ...ScrapedPerformer } }\nfragment ScrapedMovie on ScrapedMovie { stored_id name aliases duration date rating director urls synopsis studio { stored_id name } tags { stored_id name description alias_list remote_site_id } front_image back_image }\nfragment ScrapedContent on ScrapedContent { ...ScrapedStudio ...ScrapedTag ...ScrapedScene ...ScrapedGallery ...ScrapedImage ...ScrapedMovie ...ScrapedGroup ...ScrapedPerformer }",
       "fragment_name": "ScrapedContent",
       "kind": "query",
       "name": "scrapeURL",
@@ -9776,7 +9776,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation studioCreate($input: StudioCreateInput!) { studioCreate(input: $input) { ...Studio } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { ...Tag } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { ...StashID } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
+      "document": "mutation studioCreate($input: StudioCreateInput!) { studioCreate(input: $input) { ...Studio } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
       "fragment_name": "Studio",
       "kind": "mutation",
       "name": "studioCreate",
@@ -9804,7 +9804,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation studioUpdate($input: StudioUpdateInput!) { studioUpdate(input: $input) { ...Studio } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { ...Tag } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { ...StashID } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
+      "document": "mutation studioUpdate($input: StudioUpdateInput!) { studioUpdate(input: $input) { ...Studio } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }",
       "fragment_name": "Studio",
       "kind": "mutation",
       "name": "studioUpdate",
@@ -9881,7 +9881,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation tagCreate($input: TagCreateInput!) { tagCreate(input: $input) { ...Tag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
+      "document": "mutation tagCreate($input: TagCreateInput!) { tagCreate(input: $input) { ...Tag } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
       "fragment_name": "Tag",
       "kind": "mutation",
       "name": "tagCreate",
@@ -9909,7 +9909,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation tagUpdate($input: TagUpdateInput!) { tagUpdate(input: $input) { ...Tag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
+      "document": "mutation tagUpdate($input: TagUpdateInput!) { tagUpdate(input: $input) { ...Tag } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
       "fragment_name": "Tag",
       "kind": "mutation",
       "name": "tagUpdate",
@@ -9937,7 +9937,7 @@
         }
       ],
       "default_field": null,
-      "document": "mutation tagsMerge($input: TagsMergeInput!) { tagsMerge(input: $input) { ...Tag } }\nfragment StashID on StashID { endpoint stash_id updated_at }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { ...StashID } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
+      "document": "mutation tagsMerge($input: TagsMergeInput!) { tagsMerge(input: $input) { ...Tag } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }",
       "fragment_name": "Tag",
       "kind": "mutation",
       "name": "tagsMerge",

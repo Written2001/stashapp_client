@@ -6,6 +6,21 @@ import json
 from pathlib import Path
 from typing import Any
 
+DEFAULT_FRAGMENT_OVERRIDES = {
+    "Scene": "id title",
+    "Studio": "id name",
+    "Performer": "id name gender",
+    "Image": "id",
+    "Gallery": "id title",
+    "Tag": "id name",
+    "Group": "id name",
+    "ScrapedStudio": "stored_id name",
+    "StashID": "endpoint stash_id",
+    "Folder": "id path basename",
+    "BasicFile": "id path basename",
+    "ScrapedTag": "stored_id name description alias_list remote_site_id",
+}
+
 
 def load_registry(path: str | Path) -> dict[str, Any]:
     """Load and minimally validate a generated registry JSON file."""
@@ -97,7 +112,10 @@ def _selection_for_type(type_name: str | None, types: dict[str, dict[str, Any]])
         field_type = _named_type(field.get("type", {}))
         field_definition = types.get(field_type or "", {})
         if field_definition.get("kind") in {"OBJECT", "UNION", "INTERFACE"}:
-            nested = _compact_selection(field_type, types)
+            if type_name.endswith("ResultType"):
+                nested = f"...{field_type}"
+            else:
+                nested = _compact_selection(field_type, types)
             if nested:
                 selections.append(f"{field['name']} {{ {nested} }}")
         elif field_type:
@@ -109,6 +127,9 @@ def _compact_selection(type_name: str | None, types: dict[str, dict[str, Any]]) 
     """Select stable identity fields for nested objects without recursion."""
     definition = types.get(type_name or "", {})
     field_names = {field.get("name") for field in definition.get("fields", []) or []}
+    override = DEFAULT_FRAGMENT_OVERRIDES.get(type_name or "")
+    if override:
+        return override
     preferred = ["id", "name", "title", "path", "basename", "stored_id", "endpoint", "stash_id"]
     selected = [name for name in preferred if name in field_names]
     return " ".join(selected) or "__typename"
