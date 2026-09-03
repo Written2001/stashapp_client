@@ -5,21 +5,22 @@ objects. Pass them to the matching `*_filter` operation argument.
 
 ## Filter builders
 
-The available builders are:
+The available builders and their complete set of accepted fields are:
 
-| Builder | Typical operations | Common fields |
-| --- | --- | --- |
-| `find_filter` | all `find*` operations | `q`, `page`, `per_page`, `sort`, `direction` |
-| `scene_filter` | `findScenes` | `id`, `title`, `date`, `details`, `organized`, `rating100`, `duration`, `tags`, `performers`, `studios` |
-| `image_filter` | `findImages` | `id`, `path`, `rating100`, `organized`, `date`, `galleries`, `studios`, `tags`, `performers` |
-| `gallery_filter` | `findGalleries` | `id`, `title`, `date`, `organized`, `rating100`, `has_chapters`, `performers`, `studios`, `tags` |
-| `performer_filter` | `findPerformers` | `id`, `name`, `gender`, `country`, `rating100`, `image_count`, `stash_id` |
-| `studio_filter` | `findStudios` | `id`, `name`, `url`, `favorite`, `scene_count`, `image_count`, `stash_id` |
-| `tag_filter` | `findTags` | `id`, `name`, `favorite`, `scene_count`, `image_count`, `stash_id` |
-| `group_filter` | `findGroups` | `id`, `name`, `rating100`, `scene_count`, `performers`, `studios`, `tags` |
-| `marker_filter` | `findMarkers` | `id`, `title`, `seconds`, `duration`, `scene_id`, `tags` |
+| Builder | Allowed fields |
+| --- | --- |
+| `find_filter` | `direction`, `page`, `per_page`, `q`, `sort` |
+| `scene_filter` | `AND`, `NOT`, `OR`, `audio_codec`, `bitrate`, `captions`, `checksum`, `code`, `created_at`, `custom_fields`, `date`, `details`, `director`, `duplicated`, `duration`, `file_count`, `files_filter`, `framerate`, `galleries`, `galleries_filter`, `groups`, `groups_filter`, `has_markers`, `id`, `interactive`, `interactive_speed`, `is_missing`, `last_played_at`, `markers_filter`, `movies`, `movies_filter`, `o_counter`, `organized`, `orientation`, `oshash`, `path`, `performer_age`, `performer_count`, `performer_favorite`, `performer_tags`, `performers`, `performers_filter`, `phash`, `phash_distance`, `play_count`, `play_duration`, `rating100`, `resolution`, `resume_time`, `stash_id_count`, `stash_id_endpoint`, `stash_ids_endpoint`, `studios`, `studios_filter`, `tag_count`, `tags`, `tags_filter`, `title`, `updated_at`, `url`, `video_codec` |
+| `image_filter` | `AND`, `NOT`, `OR`, `checksum`, `code`, `created_at`, `custom_fields`, `date`, `details`, `file_count`, `files_filter`, `galleries`, `galleries_filter`, `id`, `is_missing`, `o_counter`, `organized`, `orientation`, `path`, `performer_age`, `performer_count`, `performer_favorite`, `performer_tags`, `performers`, `performers_filter`, `phash_distance`, `photographer`, `rating100`, `resolution`, `studios`, `studios_filter`, `tag_count`, `tags`, `tags_filter`, `title`, `updated_at`, `url` |
+| `gallery_filter` | `AND`, `NOT`, `OR`, `average_resolution`, `checksum`, `code`, `created_at`, `custom_fields`, `date`, `details`, `file_count`, `files_filter`, `folders_filter`, `has_chapters`, `id`, `image_count`, `images_filter`, `is_missing`, `is_zip`, `organized`, `parent_folder`, `path`, `performer_age`, `performer_count`, `performer_favorite`, `performer_tags`, `performers`, `performers_filter`, `photographer`, `rating100`, `scenes`, `scenes_filter`, `studios`, `studios_filter`, `tag_count`, `tags`, `tags_filter`, `title`, `updated_at`, `url` |
+| `performer_filter` | `AND`, `NOT`, `OR`, `age`, `aliases`, `birth_year`, `birthdate`, `career_end`, `career_length`, `career_start`, `circumcised`, `country`, `created_at`, `custom_fields`, `death_date`, `death_year`, `details`, `disambiguation`, `ethnicity`, `eye_color`, `fake_tits`, `filter_favorites`, `galleries_filter`, `gallery_count`, `gender`, `groups`, `hair_color`, `height_cm`, `ignore_auto_tag`, `image_count`, `images_filter`, `is_missing`, `marker_count`, `markers_filter`, `measurements`, `name`, `o_counter`, `penis_length`, `performers`, `piercings`, `play_count`, `rating100`, `scene_count`, `scenes_filter`, `stash_id_endpoint`, `stash_ids_endpoint`, `studios`, `tag_count`, `tags`, `tags_filter`, `tattoos`, `updated_at`, `url`, `weight`, and the compatibility alias `stash_id` |
+| `studio_filter` | `AND`, `NOT`, `OR`, `aliases`, `child_count`, `created_at`, `custom_fields`, `details`, `favorite`, `galleries_filter`, `gallery_count`, `group_count`, `groups_filter`, `ignore_auto_tag`, `image_count`, `images_filter`, `is_missing`, `name`, `organized`, `parents`, `rating100`, `scene_count`, `scenes_filter`, `stash_id_endpoint`, `stash_ids_endpoint`, `tag_count`, `tags`, `updated_at`, `url`, and the compatibility alias `stash_id` |
+| `tag_filter` | `AND`, `NOT`, `OR`, `aliases`, `child_count`, `children`, `created_at`, `custom_fields`, `description`, `favorite`, `galleries_filter`, `gallery_count`, `group_count`, `groups_filter`, `ignore_auto_tag`, `image_count`, `images_filter`, `is_missing`, `marker_count`, `markers_filter`, `movie_count`, `name`, `parent_count`, `parents`, `performer_count`, `performers_filter`, `scene_count`, `scenes_filter`, `sort_name`, `stash_id_endpoint`, `stash_ids_endpoint`, `studio_count`, `studios_filter`, `updated_at`, and the compatibility alias `stash_id` |
+| `group_filter` | `AND`, `NOT`, `OR`, `containing_group_count`, `containing_groups`, `created_at`, `custom_fields`, `date`, `director`, `duration`, `is_missing`, `name`, `o_counter`, `performers`, `rating100`, `scene_count`, `scenes_filter`, `studios`, `studios_filter`, `sub_group_count`, `sub_groups`, `synopsis`, `tag_count`, `tags`, `updated_at`, `url` |
+| `marker_filter` | `created_at`, `duration`, `performers`, `scene_created_at`, `scene_date`, `scene_filter`, `scene_tags`, `scene_updated_at`, `scenes`, `tags`, `updated_at` |
 
-All builders accept `AND`, `OR`, and `NOT` for boolean composition. They reject
+All builders accept `AND`, `OR`, and `NOT` for boolean composition where those
+fields are present in the table. They reject
 unknown keyword fields by default with `strict=True`:
 
 ```python
