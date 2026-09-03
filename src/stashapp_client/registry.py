@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_FRAGMENT_OVERRIDES = {
     "Scene": "id title",
     "Studio": "id name",
