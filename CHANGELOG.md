@@ -8,6 +8,13 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 - Nothing yet.
 
+## [0.1.4] - 2026-09-03
+
+- Added a complete MkDocs documentation site and GitHub Pages deployment workflow.
+- Expanded filters and criteria documentation with operators, composition, strict mode, and raw input examples.
+- Improved public API docstrings for client lifecycle, responses, pagination, mutations, schema tooling, validation, and runtime binding.
+- Added documentation dependencies and local documentation development commands.
+
 ## [0.1.3] - 2026-09-02
 
 - Fixed manual release recovery to run the current top-level workflow against a selected tag.
