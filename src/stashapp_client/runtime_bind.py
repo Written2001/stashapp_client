@@ -130,14 +130,14 @@ def _document_with_field(document: str, path: list[str]) -> str:
         for definition in parsed.definitions
         if isinstance(definition, FragmentDefinitionNode)
     }
-    definitions = []
-    for definition in parsed.definitions:
-        if isinstance(definition, FragmentDefinitionNode):
-            definition = fragments.get(definition.name.value, definition)
-            updated = _augment_fragment(definition, path, fragments, set())
-            definitions.append(updated)
-        else:
-            definitions.append(definition)
+    for fragment in tuple(fragments.values()):
+        _augment_fragment(fragment, path, fragments, set())
+    definitions = [
+        fragments.get(definition.name.value, definition)
+        if isinstance(definition, FragmentDefinitionNode)
+        else definition
+        for definition in parsed.definitions
+    ]
     return print_ast(parsed.__class__(definitions=tuple(definitions)))
 
 
@@ -191,7 +191,10 @@ def _augment_selection_set(
         elif isinstance(selection, FragmentSpreadNode):
             fragment = fragments.get(selection.name.value)
             if fragment is not None and fragment.name.value not in visited:
-                _augment_fragment(fragment, path, fragments, visited)
+                updated_fragment = _augment_fragment(fragment, path, fragments, visited)
+                found = found or _selection_contains_path(
+                    updated_fragment.selection_set, path, fragments, set()
+                )
     if add_leaf and not found:
         selections.append(FieldNode(name=NameNode(value=target)))
         changed = True
@@ -200,3 +203,29 @@ def _augment_selection_set(
         updated_set.selections = tuple(selections)
         return updated_set
     return selection_set
+
+
+def _selection_contains_path(
+    selection_set: SelectionSetNode,
+    path: list[str],
+    fragments: dict[str, FragmentDefinitionNode],
+    visited: set[str],
+) -> bool:
+    target = path[0]
+    for selection in selection_set.selections:
+        if isinstance(selection, FieldNode) and selection.name.value == target:
+            if len(path) == 1:
+                return True
+            if selection.selection_set is not None and _selection_contains_path(
+                selection.selection_set, path[1:], fragments, visited
+            ):
+                return True
+        elif isinstance(selection, FragmentSpreadNode):
+            fragment = fragments.get(selection.name.value)
+            if fragment is not None and fragment.name.value not in visited:
+                next_visited = {*visited, fragment.name.value}
+                if _selection_contains_path(
+                    fragment.selection_set, path, fragments, next_visited
+                ):
+                    return True
+    return False

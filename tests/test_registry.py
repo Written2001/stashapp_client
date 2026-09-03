@@ -263,6 +263,34 @@ def test_generated_operation_adds_requested_nested_field_to_document() -> None:
     assert "eye_color" in queries[0]
 
 
+def test_generated_operation_does_not_duplicate_nested_fragment_field() -> None:
+    queries: list[str] = []
+
+    class FakeSession:
+        def post(self, url: str, **kwargs: Any):
+            queries.append(kwargs["json"]["query"])
+
+            class Response:
+                def raise_for_status(self) -> None:
+                    return None
+
+                def json(self) -> dict[str, Any]:
+                    return {"data": {"findScenes": {"scenes": [{"studio": {"id": 1}}]}}}
+
+            return Response()
+
+        def close(self) -> None:
+            return None
+
+    client = StashClient("https://stash/graphql", "secret", session=FakeSession())  # type: ignore[arg-type]
+
+    result = client.findScenes(field=["scenes", "studio"])
+
+    assert result.to_dict("records") == [{"id": 1}]
+    assert "scenes {\n    ...Scene\n  }" in queries[0]
+    assert "...Scene\n    studio" not in queries[0]
+
+
 def test_generated_operation_rejects_unknown_requested_field() -> None:
     client = StashClient("https://stash/graphql", "secret", session=None)
     bind_registry(
