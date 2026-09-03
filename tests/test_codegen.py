@@ -176,7 +176,7 @@ def test_tag_result_uses_full_tag_fragment() -> None:
 
     rendered = render_fragments(schema)
 
-    assert '"FindTagsResultType": "fragment FindTagsResultType on FindTagsResultType { tags { id name } }"' in rendered
+    assert '"FindTagsResultType": "fragment FindTagsResultType on FindTagsResultType { tags { ...Tag } }"' in rendered
     assert 'fragment Tag on Tag { id description parents { id name } }' in rendered
     assert "fingerprint" not in rendered
 

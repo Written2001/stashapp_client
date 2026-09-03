@@ -287,7 +287,8 @@ def test_generated_operation_does_not_duplicate_nested_fragment_field() -> None:
     result = client.findScenes(field=["scenes", "studio"])
 
     assert result.to_dict("records") == [{"id": 1}]
-    assert "scenes {\n    id\n    title\n    studio\n  }" in queries[0]
+    assert "scenes {\n    ...Scene\n  }" in queries[0]
+    assert "fragment Scene on Scene" in queries[0]
     assert "...Scene\n    studio" not in queries[0]
 
 

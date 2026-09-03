@@ -152,7 +152,9 @@ def _root_selection(type_name: str, types: dict[str, dict[str, Any]]) -> str:
         field_type = _named_type(field.get("type", {}))
         field_definition = types.get(field_type or "", {})
         if field_definition.get("kind") in {"OBJECT", "UNION", "INTERFACE"}:
-            if field_type in DEFAULT_FRAGMENT_OVERRIDES or _reenters(field_type or "", type_name, types):
+            if type_name.endswith("ResultType"):
+                nested = f"...{field_type}"
+            elif field_type in DEFAULT_FRAGMENT_OVERRIDES or _reenters(field_type or "", type_name, types):
                 nested = _compact_selection(field_type, types)
             else:
                 nested = f"...{field_type}"

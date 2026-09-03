@@ -113,7 +113,10 @@ def _selection_for_type(type_name: str | None, types: dict[str, dict[str, Any]])
         field_type = _named_type(field.get("type", {}))
         field_definition = types.get(field_type or "", {})
         if field_definition.get("kind") in {"OBJECT", "UNION", "INTERFACE"}:
-            nested = _compact_selection(field_type, types)
+            if type_name.endswith("ResultType"):
+                nested = f"...{field_type}"
+            else:
+                nested = _compact_selection(field_type, types)
             if nested:
                 selections.append(f"{field['name']} {{ {nested} }}")
         elif field_type:

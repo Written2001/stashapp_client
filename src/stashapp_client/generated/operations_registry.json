@@ -7577,7 +7577,7 @@
       "kind": "query",
       "name": "findFiles",
       "result_type": "FindFilesResultType",
-      "selection": "count megapixels duration size files { id path basename }"
+      "selection": "count megapixels duration size files { ...BaseFile }"
     },
     {
       "arguments": [
@@ -7614,12 +7614,12 @@
         }
       ],
       "default_field": "folders",
-      "document": "query findFolders($folder_filter: FolderFilterType, $filter: FindFilterType, $ids: [ID!]) { findFolders(folder_filter: $folder_filter, filter: $filter, ids: $ids) { ...FindFoldersResultType } }\nfragment FindFoldersResultType on FindFoldersResultType { count folders { id path basename } }",
+      "document": "query findFolders($folder_filter: FolderFilterType, $filter: FindFilterType, $ids: [ID!]) { findFolders(folder_filter: $folder_filter, filter: $filter, ids: $ids) { ...FindFoldersResultType } }\nfragment Folder on Folder { id path basename parent_folder { id path basename } parent_folders { id path basename } zip_file { id path basename } sub_folders { id path basename } mod_time created_at updated_at }\nfragment FindFoldersResultType on FindFoldersResultType { count folders { ...Folder } }",
       "fragment_name": "FindFoldersResultType",
       "kind": "query",
       "name": "findFolders",
       "result_type": "FindFoldersResultType",
-      "selection": "count folders { id path basename }"
+      "selection": "count folders { ...Folder }"
     },
     {
       "arguments": [
@@ -7637,12 +7637,12 @@
         }
       ],
       "default_field": "galleries",
-      "document": "query findGalleries($gallery_filter: GalleryFilterType, $filter: FindFilterType, $ids: [ID!]) { findGalleries(gallery_filter: $gallery_filter, filter: $filter, ids: $ids) { ...FindGalleriesResultType } }\nfragment FindGalleriesResultType on FindGalleriesResultType { count galleries { id title } }",
+      "document": "query findGalleries($gallery_filter: GalleryFilterType, $filter: FindFilterType, $ids: [ID!]) { findGalleries(gallery_filter: $gallery_filter, filter: $filter, ids: $ids) { ...FindGalleriesResultType } }\nfragment Fingerprint on Fingerprint { type value }\nfragment GalleryFile on GalleryFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } created_at updated_at }\nfragment GalleryPathsType on GalleryPathsType { cover preview }\nfragment Gallery on Gallery { id title code urls date details photographer rating100 organized created_at updated_at files { ...GalleryFile } folder { id path basename } chapters { id title } scenes { id title } studio { id name } image_count tags { id name } performers { id name gender } cover { id } paths { ...GalleryPathsType } custom_fields }\nfragment FindGalleriesResultType on FindGalleriesResultType { count galleries { ...Gallery } }",
       "fragment_name": "FindGalleriesResultType",
       "kind": "query",
       "name": "findGalleries",
       "result_type": "FindGalleriesResultType",
-      "selection": "count galleries { id title }"
+      "selection": "count galleries { ...Gallery }"
     },
     {
       "arguments": [
@@ -7690,12 +7690,12 @@
         }
       ],
       "default_field": "groups",
-      "document": "query findGroups($group_filter: GroupFilterType, $filter: FindFilterType, $ids: [ID!]) { findGroups(group_filter: $group_filter, filter: $filter, ids: $ids) { ...FindGroupsResultType } }\nfragment FindGroupsResultType on FindGroupsResultType { count groups { id name } }",
+      "document": "query findGroups($group_filter: GroupFilterType, $filter: FindFilterType, $ids: [ID!]) { findGroups(group_filter: $group_filter, filter: $filter, ids: $ids) { ...FindGroupsResultType } }\nfragment Group on Group { id name aliases duration date rating100 studio { id name } director synopsis urls tags { id name } created_at updated_at containing_groups { __typename } sub_groups { __typename } front_image_path back_image_path scene_count performer_count sub_group_count scenes { id title } o_counter custom_fields }\nfragment FindGroupsResultType on FindGroupsResultType { count groups { ...Group } }",
       "fragment_name": "FindGroupsResultType",
       "kind": "query",
       "name": "findGroups",
       "result_type": "FindGroupsResultType",
-      "selection": "count groups { id name }"
+      "selection": "count groups { ...Group }"
     },
     {
       "arguments": [
@@ -7736,12 +7736,12 @@
         }
       ],
       "default_field": "images",
-      "document": "query findImages($image_filter: ImageFilterType, $image_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findImages(image_filter: $image_filter, image_ids: $image_ids, ids: $ids, filter: $filter) { ...FindImagesResultType } }\nfragment FindImagesResultType on FindImagesResultType { count megapixels filesize images { id } }",
+      "document": "query findImages($image_filter: ImageFilterType, $image_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findImages(image_filter: $image_filter, image_ids: $image_ids, ids: $ids, filter: $filter) { ...FindImagesResultType } }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ImageFile on ImageFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height created_at updated_at }\nfragment VisualFile on VisualFile { ...VideoFile ...ImageFile }\nfragment ImagePathsType on ImagePathsType { thumbnail preview image }\nfragment Image on Image { id title code rating100 urls date details photographer o_counter organized created_at updated_at visual_files { ...VisualFile } paths { ...ImagePathsType } galleries { id title } studio { id name } tags { id name } performers { id name gender } custom_fields }\nfragment FindImagesResultType on FindImagesResultType { count megapixels filesize images { ...Image } }",
       "fragment_name": "FindImagesResultType",
       "kind": "query",
       "name": "findImages",
       "result_type": "FindImagesResultType",
-      "selection": "count megapixels filesize images { id }"
+      "selection": "count megapixels filesize images { ...Image }"
     },
     {
       "arguments": [
@@ -7794,7 +7794,7 @@
       "kind": "query",
       "name": "findMovies",
       "result_type": "FindMoviesResultType",
-      "selection": "count movies { id name }"
+      "selection": "count movies { ...Movie }"
     },
     {
       "arguments": [
@@ -7831,12 +7831,12 @@
         }
       ],
       "default_field": "performers",
-      "document": "query findPerformers($performer_filter: PerformerFilterType, $filter: FindFilterType, $performer_ids: [Int!], $ids: [ID!]) { findPerformers(performer_filter: $performer_filter, filter: $filter, performer_ids: $performer_ids, ids: $ids) { ...FindPerformersResultType } }\nfragment FindPerformersResultType on FindPerformersResultType { count performers { id name gender } }",
+      "document": "query findPerformers($performer_filter: PerformerFilterType, $filter: FindFilterType, $performer_ids: [Int!], $ids: [ID!]) { findPerformers(performer_filter: $performer_filter, filter: $filter, performer_ids: $performer_ids, ids: $ids) { ...FindPerformersResultType } }\nfragment Performer on Performer { id name disambiguation urls gender birthdate ethnicity country eye_color height_cm measurements fake_tits penis_length circumcised career_start career_end tattoos piercings alias_list favorite tags { id name } ignore_auto_tag image_path scene_count image_count gallery_count group_count performer_count o_counter scenes { id title } stash_ids { endpoint stash_id } rating100 details death_date hair_color weight created_at updated_at groups { id name } custom_fields }\nfragment FindPerformersResultType on FindPerformersResultType { count performers { ...Performer } }",
       "fragment_name": "FindPerformersResultType",
       "kind": "query",
       "name": "findPerformers",
       "result_type": "FindPerformersResultType",
-      "selection": "count performers { id name gender }"
+      "selection": "count performers { ...Performer }"
     },
     {
       "arguments": [
@@ -7923,7 +7923,7 @@
       "kind": "query",
       "name": "findSceneMarkers",
       "result_type": "FindSceneMarkersResultType",
-      "selection": "count scene_markers { id title }"
+      "selection": "count scene_markers { ...SceneMarker }"
     },
     {
       "arguments": [
@@ -7945,12 +7945,12 @@
         }
       ],
       "default_field": "scenes",
-      "document": "query findScenes($scene_filter: SceneFilterType, $scene_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findScenes(scene_filter: $scene_filter, scene_ids: $scene_ids, ids: $ids, filter: $filter) { ...FindScenesResultType } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { id title } }",
+      "document": "query findScenes($scene_filter: SceneFilterType, $scene_ids: [Int!], $ids: [ID!], $filter: FindFilterType) { findScenes(scene_filter: $scene_filter, scene_ids: $scene_ids, ids: $ids, filter: $filter) { ...FindScenesResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { ...Scene } }",
       "fragment_name": "FindScenesResultType",
       "kind": "query",
       "name": "findScenes",
       "result_type": "FindScenesResultType",
-      "selection": "count duration filesize scenes { id title }"
+      "selection": "count duration filesize scenes { ...Scene }"
     },
     {
       "arguments": [
@@ -7960,12 +7960,12 @@
         }
       ],
       "default_field": "scenes",
-      "document": "query findScenesByPathRegex($filter: FindFilterType) { findScenesByPathRegex(filter: $filter) { ...FindScenesResultType } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { id title } }",
+      "document": "query findScenesByPathRegex($filter: FindFilterType) { findScenesByPathRegex(filter: $filter) { ...FindScenesResultType } }\nfragment VideoCaption on VideoCaption { language_code caption_type }\nfragment Fingerprint on Fingerprint { type value }\nfragment VideoFile on VideoFile { id path basename parent_folder { id path basename } zip_file { id path basename } mod_time size fingerprints { ...Fingerprint } format width height duration video_codec audio_codec frame_rate bit_rate created_at updated_at }\nfragment ScenePathsType on ScenePathsType { screenshot preview stream webp vtt sprite funscript interactive_heatmap caption }\nfragment SceneStreamEndpoint on SceneStreamEndpoint { url mime_type label }\nfragment Scene on Scene { id title code details director urls date rating100 organized o_counter interactive interactive_speed captions { ...VideoCaption } created_at updated_at last_played_at resume_time play_duration play_count play_history o_history files { ...VideoFile } paths { ...ScenePathsType } scene_markers { id title } galleries { id title } studio { id name } groups { __typename } tags { id name } performers { id name gender } stash_ids { endpoint stash_id } custom_fields sceneStreams { ...SceneStreamEndpoint } }\nfragment FindScenesResultType on FindScenesResultType { count duration filesize scenes { ...Scene } }",
       "fragment_name": "FindScenesResultType",
       "kind": "query",
       "name": "findScenesByPathRegex",
       "result_type": "FindScenesResultType",
-      "selection": "count duration filesize scenes { id title }"
+      "selection": "count duration filesize scenes { ...Scene }"
     },
     {
       "arguments": [
@@ -7998,12 +7998,12 @@
         }
       ],
       "default_field": "studios",
-      "document": "query findStudios($studio_filter: StudioFilterType, $filter: FindFilterType, $ids: [ID!]) { findStudios(studio_filter: $studio_filter, filter: $filter, ids: $ids) { ...FindStudiosResultType } }\nfragment FindStudiosResultType on FindStudiosResultType { count studios { id name } }",
+      "document": "query findStudios($studio_filter: StudioFilterType, $filter: FindFilterType, $ids: [ID!]) { findStudios(studio_filter: $studio_filter, filter: $filter, ids: $ids) { ...FindStudiosResultType } }\nfragment Studio on Studio { id name urls parent_studio { id name } child_studios { id name } aliases tags { id name } ignore_auto_tag organized image_path scene_count image_count gallery_count performer_count group_count stash_ids { endpoint stash_id } rating100 favorite details created_at updated_at groups { id name } o_counter custom_fields }\nfragment FindStudiosResultType on FindStudiosResultType { count studios { ...Studio } }",
       "fragment_name": "FindStudiosResultType",
       "kind": "query",
       "name": "findStudios",
       "result_type": "FindStudiosResultType",
-      "selection": "count studios { id name }"
+      "selection": "count studios { ...Studio }"
     },
     {
       "arguments": [
@@ -8036,12 +8036,12 @@
         }
       ],
       "default_field": "tags",
-      "document": "query findTags($tag_filter: TagFilterType, $filter: FindFilterType, $ids: [ID!]) { findTags(tag_filter: $tag_filter, filter: $filter, ids: $ids) { ...FindTagsResultType } }\nfragment FindTagsResultType on FindTagsResultType { count tags { id name } }",
+      "document": "query findTags($tag_filter: TagFilterType, $filter: FindFilterType, $ids: [ID!]) { findTags(tag_filter: $tag_filter, filter: $filter, ids: $ids) { ...FindTagsResultType } }\nfragment Tag on Tag { id name sort_name description aliases ignore_auto_tag created_at updated_at favorite stash_ids { endpoint stash_id } image_path scene_count scene_marker_count image_count gallery_count performer_count studio_count group_count parents { id name } children { id name } parent_count child_count custom_fields }\nfragment FindTagsResultType on FindTagsResultType { count tags { ...Tag } }",
       "fragment_name": "FindTagsResultType",
       "kind": "query",
       "name": "findTags",
       "result_type": "FindTagsResultType",
-      "selection": "count tags { id name }"
+      "selection": "count tags { ...Tag }"
     },
     {
       "arguments": [
@@ -8667,7 +8667,7 @@
       "kind": "query",
       "name": "parseSceneFilenames",
       "result_type": "SceneParserResultType",
-      "selection": "count results { title }"
+      "selection": "count results { ...SceneParserResult }"
     },
     {
       "arguments": [
