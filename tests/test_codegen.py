@@ -45,7 +45,7 @@ def test_generated_fragments_keep_full_root_selection() -> None:
 
     rendered = render_fragments(schema)
 
-    assert '"Scene": "fragment Scene on Scene { id title studio { ...Studio } }"' in rendered
+    assert '"Scene": "fragment Scene on Scene { id title studio { id name } }"' in rendered
     assert '"Studio": "fragment Studio on Studio { id name }"' in rendered
 
 
@@ -105,6 +105,40 @@ def test_fragment_generation_handles_abstract_and_recursive_types() -> None:
     assert '"Package": "fragment Package on Package { requires { __typename } }"' in rendered
 
 
+def test_fragment_generation_applies_nested_type_overrides() -> None:
+    schema = {
+        "types": [
+            {
+                "name": "ImageFile",
+                "kind": "OBJECT",
+                "fields": [
+                    {
+                        "name": "parent_folder",
+                        "type": {"kind": "OBJECT", "name": "Folder"},
+                    }
+                ],
+            },
+            {
+                "name": "Folder",
+                "kind": "OBJECT",
+                "fields": [
+                    {"name": "id", "type": {"kind": "SCALAR", "name": "ID"}},
+                    {"name": "path", "type": {"kind": "SCALAR", "name": "String"}},
+                    {"name": "basename", "type": {"kind": "SCALAR", "name": "String"}},
+                    {"name": "mod_time", "type": {"kind": "SCALAR", "name": "Time"}},
+                ],
+            },
+            {"name": "ID", "kind": "SCALAR"},
+            {"name": "String", "kind": "SCALAR"},
+            {"name": "Time", "kind": "SCALAR"},
+        ]
+    }
+
+    rendered = render_fragments(schema)
+
+    assert '"ImageFile": "fragment ImageFile on ImageFile { parent_folder { id path basename } }"' in rendered
+
+
 def test_tag_result_uses_full_tag_fragment() -> None:
     schema = {
         "types": [
@@ -142,8 +176,8 @@ def test_tag_result_uses_full_tag_fragment() -> None:
 
     rendered = render_fragments(schema)
 
-    assert '"FindTagsResultType": "fragment FindTagsResultType on FindTagsResultType { tags { ...Tag } }"' in rendered
-    assert 'fragment Tag on Tag { id description parents { id } }' in rendered
+    assert '"FindTagsResultType": "fragment FindTagsResultType on FindTagsResultType { tags { id name } }"' in rendered
+    assert 'fragment Tag on Tag { id description parents { id name } }' in rendered
     assert "fingerprint" not in rendered
 
 

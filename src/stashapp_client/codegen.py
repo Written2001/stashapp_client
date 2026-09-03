@@ -6,7 +6,12 @@ import json
 from typing import Any
 
 from .fragments import combine_fragments, get_dependent_fragments
-from .registry import _compact_selection, _has_required_arguments, _named_type
+from .registry import (
+    DEFAULT_FRAGMENT_OVERRIDES,
+    _compact_selection,
+    _has_required_arguments,
+    _named_type,
+)
 
 
 def render_inputs(schema: dict[str, Any]) -> str:
@@ -147,7 +152,7 @@ def _root_selection(type_name: str, types: dict[str, dict[str, Any]]) -> str:
         field_type = _named_type(field.get("type", {}))
         field_definition = types.get(field_type or "", {})
         if field_definition.get("kind") in {"OBJECT", "UNION", "INTERFACE"}:
-            if _reenters(field_type or "", type_name, types):
+            if field_type in DEFAULT_FRAGMENT_OVERRIDES or _reenters(field_type or "", type_name, types):
                 nested = _compact_selection(field_type, types)
             else:
                 nested = f"...{field_type}"
