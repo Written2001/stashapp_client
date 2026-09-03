@@ -11,6 +11,7 @@ This project follows [Semantic Versioning](https://semver.org/).
 - Expanded filter helpers to accept all fields from the generated GraphQL
 	filter input types, including performer fields such as `hair_color`.
 - Documented the complete allowed field set for every filter helper.
+- Automated GitHub Releases and PyPI publication for merges into `main`.
 
 ## [0.1.4] - 2026-09-03
 

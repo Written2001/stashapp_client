@@ -86,12 +86,14 @@ Treat a Stash schema upgrade as a deliberate client release:
 3. Regenerate `schema.json`, `operations_registry.json`, `fragments.py`, and `inputs.py` from the new pinned checkout using the command above.
 4. Validate every generated document against the new schema and run the complete test and lint checks.
 5. Add or update tests for changed operations, filters, inputs, response paths, and recursive or abstract types.
-6. Update `CHANGELOG.md` and bump the client version according to SemVer:
+6. Add the changes directly under the next dated release heading in
+    `CHANGELOG.md` and bump the client version according to SemVer:
    - Patch: bug fixes and compatible generated changes
    - Minor: new compatible API capabilities
    - Major: breaking Python or GraphQL API behavior
 7. Review the generated diff. Confirm the registry provenance names the new Stash ref and commit, and confirm no credentials or local files entered the change.
-8. Commit the source and generated artifacts together, then publish a matching Git tag such as `v0.2.0` through a GitHub Release.
+8. Commit the source and generated artifacts together. Merging the pull request
+    into `main` creates the matching tag, GitHub Release, and PyPI publication.
 
 Live introspection is available for diagnostics or when a Stash checkout is not available:
 

@@ -2,16 +2,13 @@ name: Release Python package
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       tag:
         description: Release tag to publish
         required: true
-
-env:
-  RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
 
 jobs:
   release:
@@ -21,16 +18,20 @@ jobs:
       contents: write
     outputs:
       package_name: ${{ steps.metadata.outputs.package_name }}
+      release_tag: ${{ steps.metadata.outputs.release_tag }}
 
     steps:
-      - name: Check out tagged commit
+      - name: Check out release commit
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ env.RELEASE_TAG }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.sha }}
 
       - name: Read package metadata
         id: metadata
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_TAG: ${{ inputs.tag }}
         run: |
           python - <<'PY'
           import os
@@ -39,19 +40,44 @@ jobs:
           with open("pyproject.toml", "rb") as project_file:
               project = tomllib.load(project_file)["project"]
 
+          version = project["version"]
+          release_tag = (
+              os.environ["INPUT_TAG"]
+              if os.environ["EVENT_NAME"] == "workflow_dispatch"
+              else f"v{version}"
+          )
           with open(os.environ["GITHUB_OUTPUT"], "a") as output_file:
               print(f"package_name={project['name']}", file=output_file)
-              print(f"package_version={project['version']}", file=output_file)
+              print(f"package_version={version}", file=output_file)
+              print(f"release_tag={release_tag}", file=output_file)
           PY
 
-      - name: Validate SemVer tag
+      - name: Validate release metadata
         env:
           PACKAGE_VERSION: ${{ steps.metadata.outputs.package_version }}
+          RELEASE_TAG: ${{ steps.metadata.outputs.release_tag }}
         run: |
           [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
           [[ "${RELEASE_TAG#v}" == "$PACKAGE_VERSION" ]]
+          grep -q "^## \[$PACKAGE_VERSION\] - " CHANGELOG.md
+
+      - name: Create and push release tag
+        if: github.event_name == 'push'
+        env:
+          RELEASE_TAG: ${{ steps.metadata.outputs.release_tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git show-ref --verify --quiet "refs/tags/$RELEASE_TAG"; then
+            test "$(git rev-list -n 1 "$RELEASE_TAG")" = "$GITHUB_SHA"
+          else
+            git tag "$RELEASE_TAG" "$GITHUB_SHA"
+            git push origin "$RELEASE_TAG"
+          fi
 
       - name: Verify tagged commit is on main
+        env:
+          RELEASE_TAG: ${{ steps.metadata.outputs.release_tag }}
         run: |
           git fetch origin main --no-tags
           tag_sha=$(git rev-list -n 1 "$RELEASE_TAG")
@@ -61,6 +87,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PACKAGE_NAME: ${{ steps.metadata.outputs.package_name }}
+          RELEASE_TAG: ${{ steps.metadata.outputs.release_tag }}
         run: |
           tag_sha=$(git rev-list -n 1 "$RELEASE_TAG")
           if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
@@ -83,7 +110,7 @@ jobs:
       - name: Check out tagged commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ env.RELEASE_TAG }}
+          ref: ${{ needs.release.outputs.release_tag }}
           persist-credentials: false
 
       - name: Set up Python
