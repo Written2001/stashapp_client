@@ -44,4 +44,9 @@ Verification is enabled by default. For a private certificate authority, pass it
 client = StashClient.from_env(verify="/path/to/internal-ca.pem")
 ```
 
+The client also accepts a self-signed server certificate or CA bundle in this
+argument. Certificate and hostname verification remain enabled. This includes
+older certificates that Python 3.14 rejects under OpenSSL's strict X.509
+profile when they omit the optional `keyUsage` extension.
+
 Use `verify=False` only for a trusted internal endpoint. The `STASHAPI_TLS_VERIFY` environment variable accepts `true`, `false`, or a CA bundle path.
