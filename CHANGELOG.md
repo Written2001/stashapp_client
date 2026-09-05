@@ -4,7 +4,7 @@ All notable changes to this project are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
-## [Unreleased]
+## [0.1.8] - 2026-09-05
 
 - Added compatibility for legacy self-signed CA certificates that omit the
 	optional `keyUsage` extension under Python 3.14's strict X.509 validation.
