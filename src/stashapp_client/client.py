@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import os
+import ssl
 from pathlib import Path
 from typing import Any
 
 import requests
 from requests import Session
+from requests.adapters import HTTPAdapter
 
 from .errors import StashConnectionError, StashResponseError, TransportError
 from .response import extract_response
@@ -46,6 +48,8 @@ class StashClient:
         self.verify = verify
         self.timeout = timeout
         self.session = session or requests.Session()
+        if isinstance(verify, str) and session is None:
+            self.session.mount("https://", _CustomCABundleAdapter(verify))
         selected_registry = registry_path or Path(__file__).parent / "generated" / "operations_registry.json"
         if selected_registry.exists():
             load_and_bind(self, str(selected_registry))
@@ -153,3 +157,18 @@ def _parse_verify(value: str) -> bool | str:
     if lowered == "false":
         return False
     return value
+
+
+class _CustomCABundleAdapter(HTTPAdapter):
+    """Use a custom CA bundle with compatibility for older self-signed CAs."""
+
+    def __init__(self, cafile: str) -> None:
+        self.cafile = cafile
+        super().__init__()
+
+    def init_poolmanager(self, *args: Any, **kwargs: Any) -> None:
+        context = ssl.create_default_context(cafile=self.cafile)
+        strict_flag = getattr(ssl, "VERIFY_X509_STRICT", 0)
+        context.verify_flags &= ~strict_flag
+        kwargs["ssl_context"] = context
+        super().init_poolmanager(*args, **kwargs)

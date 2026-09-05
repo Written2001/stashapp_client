@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+- Added compatibility for legacy self-signed CA certificates that omit the
+	optional `keyUsage` extension under Python 3.14's strict X.509 validation.
+- Kept certificate and hostname verification enabled for custom CA bundles.
+
 ## [0.1.7] - 2026-09-03
 
 - Added explicit nested fragment overrides for fields with unreliable GraphQL

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import json
+import ssl
 from typing import Any
 
 import pandas as pd
 import pytest
+from requests.adapters import HTTPAdapter
 
 from stashapp_client import StashClient
 from stashapp_client.errors import GraphQLError
@@ -161,6 +163,22 @@ def test_from_env_parses_tls_verify_setting(monkeypatch: Any) -> None:
     client = StashClient.from_env()
 
     assert client.verify is False
+    client.close()
+
+
+def test_custom_ca_bundle_supports_legacy_self_signed_certificates() -> None:
+    ca_bundle = ssl.get_default_verify_paths().cafile
+    assert ca_bundle is not None
+
+    client = StashClient("https://stash/graphql", "secret", verify=ca_bundle)
+    adapter = client.session.get_adapter("https://")
+    assert isinstance(adapter, HTTPAdapter)
+    context = adapter.poolmanager.connection_pool_kw["ssl_context"]
+
+    assert isinstance(context, ssl.SSLContext)
+    assert context.verify_mode is ssl.CERT_REQUIRED
+    if hasattr(ssl, "VERIFY_X509_STRICT"):
+        assert not context.verify_flags & ssl.VERIFY_X509_STRICT
     client.close()
 
 
