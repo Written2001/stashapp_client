@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 This project follows [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+## [0.2.0] - 2026-09-05
+
+- Added `wait_for_job()` to poll long-running Stash jobs until completion.
+- Added exact-name ID helpers for studios, tags, and performers with explicit
+	duplicate-match policies.
+- Added validation and test coverage for job polling and named lookups.
+
 ## [0.1.8] - 2026-09-05
 
 - Added compatibility for legacy self-signed CA certificates that omit the
