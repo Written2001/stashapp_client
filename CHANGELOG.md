@@ -6,6 +6,11 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-06
+
+- Fixed default `*Create` and `*Update` mutation methods to return one-row
+	pandas DataFrames instead of raw dictionaries.
+
 ## [0.2.0] - 2026-09-05
 
 - Added `wait_for_job()` to poll long-running Stash jobs until completion.
