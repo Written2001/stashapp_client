@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 from typing import Any
 
+import pandas as pd
 from graphql import parse, print_ast
 from graphql.language.ast import (
     FieldNode,
@@ -44,9 +45,16 @@ def _operation_method(client: Any, operation: dict[str, Any]):
         document = operation.get("document") or _document(operation)
         selected_field = field
         requested_path = [field] if isinstance(field, str) else field
-        if response == "data" and (selected_field is not None or operation.get("default_field")):
+        if response == "data" and (
+            selected_field is not None
+            or operation.get("default_field")
+            or _should_tabularize(operation, response=response, field=field)
+        ):
             path = [selected_field] if isinstance(selected_field, str) else selected_field
-            selected_field = [operation["name"], *(path or [operation["default_field"]])]
+            if path is None and _should_tabularize(operation, response=response, field=field):
+                selected_field = [operation["name"]]
+            else:
+                selected_field = [operation["name"], *(path or [operation["default_field"]])]
             if requested_path:
                 _validate_field_path(operation, requested_path, client._registry_field_types)
                 document = _document_with_field(document, requested_path)
@@ -61,11 +69,25 @@ def _operation_method(client: Any, operation: dict[str, Any]):
                 )
 
             return paginate(fetch_page, start_page=page)
-        return client.execute(document, variables, response=response, field=selected_field)
+        result = client.execute(document, variables, response=response, field=selected_field)
+        if _should_tabularize(operation, response=response, field=field):
+            return pd.DataFrame([result])
+        return result
 
     call.__name__ = operation["name"]
     call.__doc__ = f"Call GraphQL {operation.get('kind', 'query')} operation {operation['name']}."
     return call
+
+
+def _should_tabularize(
+    operation: dict[str, Any], *, response: str, field: str | list[str] | None
+) -> bool:
+    return (
+        response == "data"
+        and field is None
+        and operation.get("kind") == "mutation"
+        and operation["name"].lower().endswith(("create", "update"))
+    )
 
 
 def _validate_inputs(

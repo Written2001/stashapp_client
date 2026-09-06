@@ -4,6 +4,7 @@ from importlib.resources import files
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import pytest
 
 from stashapp_client import StashClient
@@ -132,6 +133,38 @@ def test_runtime_binding_validates_generated_input_metadata_before_request() -> 
         client.tagCreate(input={"name": None})
 
     assert session.calls == 0
+
+
+def test_default_create_and_update_results_are_dataframes() -> None:
+    class FakeSession:
+        def post(self, url: str, **kwargs: Any):
+            operation = "tagCreate" if "tagCreate" in kwargs["json"]["query"] else "tagUpdate"
+
+            class Response:
+                def raise_for_status(self) -> None:
+                    return None
+
+                def json(self) -> dict[str, Any]:
+                    return {"data": {operation: {"id": "1", "name": "Reviewed"}}}
+
+            return Response()
+
+        def close(self) -> None:
+            return None
+
+    client = StashClient("https://stash/graphql", "secret", session=FakeSession())  # type: ignore[arg-type]
+    bind_registry(
+        client,
+        {
+            "operations": [
+                {"name": "tagCreate", "kind": "mutation", "arguments": [], "selection": "id name"},
+                {"name": "tagUpdate", "kind": "mutation", "arguments": [], "selection": "id name"},
+            ]
+        },
+    )
+
+    assert isinstance(client.tagCreate(), pd.DataFrame)
+    assert client.tagUpdate().to_dict("records") == [{"id": "1", "name": "Reviewed"}]
 
 
 def test_runtime_binding_rejects_null_non_null_list_element() -> None:
