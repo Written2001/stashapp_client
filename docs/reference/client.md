@@ -24,3 +24,11 @@ performer_id = client.find_performer_id("Example Performer")
 
 Named lookups raise when there are no matches or multiple matches. Use
 `multiple="first"` or `multiple="all"` to choose a different duplicate policy.
+
+Generated operations use these default data-shape rules:
+
+- List-of-object query results and bulk mutation results are pandas DataFrames.
+- Single create and update mutation results are one-row pandas DataFrames.
+- Supplying `field=` returns the selected scalar or list value instead.
+- Nested dictionaries and lists inside DataFrame columns remain unflattened;
+	use `flatten_column()` or `explode_column()` when needed.

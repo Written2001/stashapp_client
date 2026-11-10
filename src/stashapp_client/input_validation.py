@@ -1,5 +1,6 @@
 """Validation for schema-derived GraphQL input objects."""
 
+import json
 from typing import Any
 
 
@@ -51,6 +52,7 @@ def _validate_input(name: str, value: Any, input_fields: dict[str, Any], path: s
         if field not in value or value[field] is None:
             continue
         field_path = f"{path}.{field}"
+        _validate_json_value(value[field], field_path)
         _validate_list_nullability(value[field], spec["type"], field_path)
         nested = _input_name(spec["type"], input_fields)
         if nested:
@@ -69,8 +71,10 @@ def _validate_nested(
 
 
 def _validate_list_nullability(value: Any, type_string: str, path: str) -> None:
-    if not isinstance(value, list) or not type_string.startswith("["):
+    if not type_string.startswith("["):
         return
+    if not isinstance(value, (list, tuple)):
+        raise TypeError(f"{path} must be a list")
     closing = type_string.rfind("]")
     item_type = type_string[1:closing]
     item_non_null = item_type.endswith("!")
@@ -80,6 +84,25 @@ def _validate_list_nullability(value: Any, type_string: str, path: str) -> None:
             raise ValueError(f"{path}[{index}] must not be null")
         if item is not None:
             _validate_list_nullability(item, item_type, f"{path}[{index}]")
+
+
+def _validate_json_value(value: Any, path: str) -> None:
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise TypeError(f"{path} contains a non-string object key")
+            _validate_json_value(item, f"{path}.{key}")
+        return
+    if isinstance(value, (list, tuple)):
+        for index, item in enumerate(value):
+            _validate_json_value(item, f"{path}[{index}]")
+        return
+    try:
+        json.dumps(value)
+    except (TypeError, ValueError) as exc:
+        raise TypeError(f"{path} must be JSON-serializable") from exc
 
 
 def _input_name(type_string: str, input_fields: dict[str, Any]) -> str | None:
