@@ -6,6 +6,14 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-10
+
+- Fixed bulk create and update mutations returning multiple objects by
+	preserving their multi-row DataFrame results.
+- Added early validation for non-JSON input values and invalid list shapes.
+- Fixed generated default fields for configuration, SQL, and validation operations.
+- Documented generated operation return shapes and nested DataFrame values.
+
 ## [0.3.0] - 2026-11-10
 
 - Updated schema and registry for compatibility with Stash v0.32.0.

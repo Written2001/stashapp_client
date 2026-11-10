@@ -70,6 +70,8 @@ def _operation_method(client: Any, operation: dict[str, Any]):
             return paginate(fetch_page, start_page=page)
         result = client.execute(document, variables, response=response, field=selected_field)
         if _should_tabularize(operation, response=response, field=field):
+            if isinstance(result, pd.DataFrame):
+                return result
             return pd.DataFrame([result])
         return result
 

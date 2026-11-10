@@ -32,6 +32,55 @@ def test_build_registry_is_sorted_and_describes_arguments() -> None:
     assert registry["operations"][0]["arguments"] == [{"name": "filter", "type": "FindFilterType"}]
 
 
+def test_build_registry_only_infers_existing_default_fields() -> None:
+    schema = {
+        "queryType": {"name": "Query"},
+        "mutationType": {"name": "Mutation"},
+        "types": [
+            {
+                "name": "Query",
+                "fields": [
+                    {
+                        "name": "configuration",
+                        "args": [],
+                        "type": {"kind": "OBJECT", "name": "ConfigResult"},
+                    }
+                ],
+            },
+            {
+                "name": "Mutation",
+                "fields": [
+                    {
+                        "name": "configureGeneral",
+                        "args": [],
+                        "type": {"kind": "OBJECT", "name": "ConfigGeneralResult"},
+                    }
+                ],
+            },
+            {
+                "name": "ConfigResult",
+                "fields": [
+                    {"name": "general", "type": {"kind": "OBJECT", "name": "ConfigGeneralResult"}},
+                    {"name": "interface", "type": {"kind": "OBJECT", "name": "ConfigInterfaceResult"}},
+                ],
+            },
+            {
+                "name": "ConfigGeneralResult",
+                "fields": [{"name": "databasePath", "type": {"kind": "SCALAR", "name": "String"}}],
+            },
+            {
+                "name": "ConfigInterfaceResult",
+                "fields": [{"name": "language", "type": {"kind": "SCALAR", "name": "String"}}],
+            },
+        ],
+    }
+
+    operations = {item["name"]: item for item in build_registry(schema)["operations"]}
+
+    assert operations["configuration"]["default_field"] is None
+    assert operations["configureGeneral"]["default_field"] is None
+
+
 def test_runtime_binding_dispatches_registry_operation() -> None:
     class FakeSession:
         def post(self, url: str, **kwargs: Any):
@@ -165,6 +214,87 @@ def test_default_create_and_update_results_are_dataframes() -> None:
 
     assert isinstance(client.tagCreate(), pd.DataFrame)
     assert client.tagUpdate().to_dict("records") == [{"id": "1", "name": "Reviewed"}]
+
+
+def test_bulk_update_results_are_multirow_dataframes() -> None:
+    class FakeSession:
+        def post(self, url: str, **kwargs: Any):
+            class Response:
+                def raise_for_status(self) -> None:
+                    return None
+
+                def json(self) -> dict[str, Any]:
+                    return {"data": {"bulkImageUpdate": [{"id": "1"}, {"id": "2"}]}}
+
+            return Response()
+
+        def close(self) -> None:
+            return None
+
+    client = StashClient("https://stash/graphql", "secret", session=FakeSession())  # type: ignore[arg-type]
+    bind_registry(
+        client,
+        {
+            "operations": [
+                {
+                    "name": "bulkImageUpdate",
+                    "kind": "mutation",
+                    "arguments": [],
+                    "selection": "id",
+                }
+            ]
+        },
+    )
+
+    result = client.bulkImageUpdate()
+
+    assert isinstance(result, pd.DataFrame)
+    assert result.to_dict("records") == [{"id": "1"}, {"id": "2"}]
+    assert client.bulkImageUpdate(field="id") == ["1", "2"]
+
+
+def test_input_validation_rejects_non_json_list_values_before_request() -> None:
+    class FakeSession:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def post(self, url: str, **kwargs: Any):
+            self.calls += 1
+            raise AssertionError("invalid input reached transport")
+
+        def close(self) -> None:
+            return None
+
+    session = FakeSession()
+    client = StashClient("https://stash/graphql", "secret", session=session)  # type: ignore[arg-type]
+    bind_registry(
+        client,
+        {
+            "input_fields": {
+                "GalleryUpdateInput": {
+                    "id": {"type": "ID!", "required": True},
+                    "tag_ids": {"type": "[ID!]", "required": False},
+                }
+            },
+            "operations": [
+                {
+                    "name": "galleryUpdate",
+                    "kind": "mutation",
+                    "arguments": [{"name": "input", "type": "GalleryUpdateInput!"}],
+                    "selection": "id",
+                }
+            ],
+        },
+    )
+
+    with pytest.raises(TypeError, match="input.tag_ids"):
+        client.galleryUpdate(
+            input={"id": "1", "tag_ids": pd.DataFrame({"id": ["2"]})}
+        )
+    with pytest.raises(TypeError, match="input.tag_ids must be a list"):
+        client.galleryUpdate(input={"id": "1", "tag_ids": "2"})
+
+    assert session.calls == 0
 
 
 def test_runtime_binding_rejects_null_non_null_list_element() -> None:

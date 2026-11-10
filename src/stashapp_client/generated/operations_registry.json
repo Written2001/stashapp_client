@@ -7298,7 +7298,7 @@
     },
     {
       "arguments": [],
-      "default_field": "configuration",
+      "default_field": null,
       "document": "query configuration { configuration { ...ConfigResult } }\nfragment StashConfig on StashConfig { path excludeVideo excludeImage }\nfragment StashBox on StashBox { endpoint api_key name max_requests_per_minute }\nfragment PackageSource on PackageSource { name url local_path }\nfragment ConfigGeneralResult on ConfigGeneralResult { stashes { ...StashConfig } databasePath backupDirectoryPath deleteTrashPath generatedPath metadataPath configFilePath scrapersPath pluginsPath cachePath blobsPath blobsStorage ffmpegPath ffprobePath calculateMD5 videoFileNamingAlgorithm parallelTasks previewAudio previewSegments previewSegmentDuration maxMarkerPreviewDuration defaultMarkerPreviewDuration previewExcludeStart previewExcludeEnd previewPreset transcodeHardwareAcceleration maxTranscodeSize maxStreamingTranscodeSize transcodeInputArgs transcodeOutputArgs liveTranscodeInputArgs liveTranscodeOutputArgs drawFunscriptHeatmapRange writeImageThumbnails createImageClipsFromVideos apiKey username password maxSessionAge logFile logOut logLevel logAccess logFileMaxSize useCustomSpriteInterval spriteInterval minimumSprites maximumSprites spriteScreenshotSize videoExtensions imageExtensions galleryExtensions createGalleriesFromFolders galleryCoverRegex excludes imageExcludes customPerformerImageLocation stashBoxes { ...StashBox } pythonPath scraperPackageSources { ...PackageSource } pluginPackageSources { ...PackageSource } }\nfragment ConfigImageLightboxResult on ConfigImageLightboxResult { slideshowDelay displayMode scaleUp resetZoomOnNav scrollMode scrollAttemptsBeforeChange disableAnimation }\nfragment ConfigDisableDropdownCreate on ConfigDisableDropdownCreate { performer tag studio movie gallery }\nfragment ConfigInterfaceResult on ConfigInterfaceResult { sfwContentMode menuItems soundOnPreview wallShowTitle wallPlayback showScrubber maximumLoopDuration noBrowser notificationsEnabled autostartVideo autostartVideoOnPlaySelected continuePlaylistDefault showStudioAsText css cssEnabled javascript javascriptEnabled customLocales customLocalesEnabled disableCustomizations language imageLightbox { ...ConfigImageLightboxResult } disableDropdownCreate { ...ConfigDisableDropdownCreate } handyKey funscriptOffset useStashHostedFunscript }\nfragment ConfigDLNAResult on ConfigDLNAResult { serverName enabled port whitelistedIPs interfaces videoSortOrder }\nfragment ConfigScrapingResult on ConfigScrapingResult { scraperUserAgent scraperCDPPath scraperCertCheck excludeTagPatterns }\nfragment ScanMetadataOptions on ScanMetadataOptions { rescan scanGenerateCovers scanGeneratePreviews scanGenerateImagePreviews scanGenerateSprites scanGeneratePhashes scanGenerateImagePhashes scanGenerateThumbnails scanGenerateClipPreviews }\nfragment ScraperSource on ScraperSource { stash_box_endpoint scraper_id }\nfragment IdentifyFieldOptions on IdentifyFieldOptions { field strategy createMissing }\nfragment IdentifyMetadataOptions on IdentifyMetadataOptions { fieldOptions { ...IdentifyFieldOptions } setCoverImage setOrganized performerGenders skipMultipleMatches skipMultipleMatchTag skipSingleNamePerformers skipSingleNamePerformerTag }\nfragment IdentifySource on IdentifySource { source { ...ScraperSource } options { ...IdentifyMetadataOptions } }\nfragment IdentifyMetadataTaskOptions on IdentifyMetadataTaskOptions { sources { ...IdentifySource } options { ...IdentifyMetadataOptions } }\nfragment AutoTagMetadataOptions on AutoTagMetadataOptions { performers studios tags }\nfragment GeneratePreviewOptions on GeneratePreviewOptions { previewSegments previewSegmentDuration previewExcludeStart previewExcludeEnd previewPreset }\nfragment GenerateMetadataOptions on GenerateMetadataOptions { covers sprites previews imagePreviews previewOptions { ...GeneratePreviewOptions } markers markerImagePreviews markerScreenshots transcodes phashes interactiveHeatmapsSpeeds imageThumbnails clipPreviews }\nfragment ConfigDefaultSettingsResult on ConfigDefaultSettingsResult { scan { ...ScanMetadataOptions } identify { ...IdentifyMetadataTaskOptions } autoTag { ...AutoTagMetadataOptions } generate { ...GenerateMetadataOptions } deleteFile deleteGenerated }\nfragment ConfigResult on ConfigResult { general { ...ConfigGeneralResult } interface { ...ConfigInterfaceResult } dlna { ...ConfigDLNAResult } scraping { ...ConfigScrapingResult } defaults { ...ConfigDefaultSettingsResult } ui plugins }",
       "fragment_name": "ConfigResult",
       "kind": "query",
@@ -7313,7 +7313,7 @@
           "type": "ConfigDLNAInput!"
         }
       ],
-      "default_field": "configureDLNA",
+      "default_field": null,
       "document": "mutation configureDLNA($input: ConfigDLNAInput!) { configureDLNA(input: $input) { ...ConfigDLNAResult } }\nfragment ConfigDLNAResult on ConfigDLNAResult { serverName enabled port whitelistedIPs interfaces videoSortOrder }",
       "fragment_name": "ConfigDLNAResult",
       "kind": "mutation",
@@ -7328,7 +7328,7 @@
           "type": "ConfigDefaultSettingsInput!"
         }
       ],
-      "default_field": "configureDefaults",
+      "default_field": null,
       "document": "mutation configureDefaults($input: ConfigDefaultSettingsInput!) { configureDefaults(input: $input) { ...ConfigDefaultSettingsResult } }\nfragment ScanMetadataOptions on ScanMetadataOptions { rescan scanGenerateCovers scanGeneratePreviews scanGenerateImagePreviews scanGenerateSprites scanGeneratePhashes scanGenerateImagePhashes scanGenerateThumbnails scanGenerateClipPreviews }\nfragment ScraperSource on ScraperSource { stash_box_endpoint scraper_id }\nfragment IdentifyFieldOptions on IdentifyFieldOptions { field strategy createMissing }\nfragment IdentifyMetadataOptions on IdentifyMetadataOptions { fieldOptions { ...IdentifyFieldOptions } setCoverImage setOrganized performerGenders skipMultipleMatches skipMultipleMatchTag skipSingleNamePerformers skipSingleNamePerformerTag }\nfragment IdentifySource on IdentifySource { source { ...ScraperSource } options { ...IdentifyMetadataOptions } }\nfragment IdentifyMetadataTaskOptions on IdentifyMetadataTaskOptions { sources { ...IdentifySource } options { ...IdentifyMetadataOptions } }\nfragment AutoTagMetadataOptions on AutoTagMetadataOptions { performers studios tags }\nfragment GeneratePreviewOptions on GeneratePreviewOptions { previewSegments previewSegmentDuration previewExcludeStart previewExcludeEnd previewPreset }\nfragment GenerateMetadataOptions on GenerateMetadataOptions { covers sprites previews imagePreviews previewOptions { ...GeneratePreviewOptions } markers markerImagePreviews markerScreenshots transcodes phashes interactiveHeatmapsSpeeds imageThumbnails clipPreviews }\nfragment ConfigDefaultSettingsResult on ConfigDefaultSettingsResult { scan { ...ScanMetadataOptions } identify { ...IdentifyMetadataTaskOptions } autoTag { ...AutoTagMetadataOptions } generate { ...GenerateMetadataOptions } deleteFile deleteGenerated }",
       "fragment_name": "ConfigDefaultSettingsResult",
       "kind": "mutation",
@@ -7343,7 +7343,7 @@
           "type": "ConfigGeneralInput!"
         }
       ],
-      "default_field": "configureGeneral",
+      "default_field": null,
       "document": "mutation configureGeneral($input: ConfigGeneralInput!) { configureGeneral(input: $input) { ...ConfigGeneralResult } }\nfragment StashConfig on StashConfig { path excludeVideo excludeImage }\nfragment StashBox on StashBox { endpoint api_key name max_requests_per_minute }\nfragment PackageSource on PackageSource { name url local_path }\nfragment ConfigGeneralResult on ConfigGeneralResult { stashes { ...StashConfig } databasePath backupDirectoryPath deleteTrashPath generatedPath metadataPath configFilePath scrapersPath pluginsPath cachePath blobsPath blobsStorage ffmpegPath ffprobePath calculateMD5 videoFileNamingAlgorithm parallelTasks previewAudio previewSegments previewSegmentDuration maxMarkerPreviewDuration defaultMarkerPreviewDuration previewExcludeStart previewExcludeEnd previewPreset transcodeHardwareAcceleration maxTranscodeSize maxStreamingTranscodeSize transcodeInputArgs transcodeOutputArgs liveTranscodeInputArgs liveTranscodeOutputArgs drawFunscriptHeatmapRange writeImageThumbnails createImageClipsFromVideos apiKey username password maxSessionAge logFile logOut logLevel logAccess logFileMaxSize useCustomSpriteInterval spriteInterval minimumSprites maximumSprites spriteScreenshotSize videoExtensions imageExtensions galleryExtensions createGalleriesFromFolders galleryCoverRegex excludes imageExcludes customPerformerImageLocation stashBoxes { ...StashBox } pythonPath scraperPackageSources { ...PackageSource } pluginPackageSources { ...PackageSource } }",
       "fragment_name": "ConfigGeneralResult",
       "kind": "mutation",
@@ -7358,7 +7358,7 @@
           "type": "ConfigInterfaceInput!"
         }
       ],
-      "default_field": "configureInterface",
+      "default_field": null,
       "document": "mutation configureInterface($input: ConfigInterfaceInput!) { configureInterface(input: $input) { ...ConfigInterfaceResult } }\nfragment ConfigImageLightboxResult on ConfigImageLightboxResult { slideshowDelay displayMode scaleUp resetZoomOnNav scrollMode scrollAttemptsBeforeChange disableAnimation }\nfragment ConfigDisableDropdownCreate on ConfigDisableDropdownCreate { performer tag studio movie gallery }\nfragment ConfigInterfaceResult on ConfigInterfaceResult { sfwContentMode menuItems soundOnPreview wallShowTitle wallPlayback showScrubber maximumLoopDuration noBrowser notificationsEnabled autostartVideo autostartVideoOnPlaySelected continuePlaylistDefault showStudioAsText css cssEnabled javascript javascriptEnabled customLocales customLocalesEnabled disableCustomizations language imageLightbox { ...ConfigImageLightboxResult } disableDropdownCreate { ...ConfigDisableDropdownCreate } handyKey funscriptOffset useStashHostedFunscript }",
       "fragment_name": "ConfigInterfaceResult",
       "kind": "mutation",
@@ -7390,7 +7390,7 @@
           "type": "ConfigScrapingInput!"
         }
       ],
-      "default_field": "configureScraping",
+      "default_field": null,
       "document": "mutation configureScraping($input: ConfigScrapingInput!) { configureScraping(input: $input) { ...ConfigScrapingResult } }\nfragment ConfigScrapingResult on ConfigScrapingResult { scraperUserAgent scraperCDPPath scraperCertCheck excludeTagPatterns }",
       "fragment_name": "ConfigScrapingResult",
       "kind": "mutation",
@@ -7545,7 +7545,7 @@
           "type": "[Any]"
         }
       ],
-      "default_field": "execSQL",
+      "default_field": null,
       "document": "mutation execSQL($sql: String!, $args: [Any]) { execSQL(sql: $sql, args: $args) { ...SQLExecResult } }\nfragment SQLExecResult on SQLExecResult { rows_affected last_insert_id }",
       "fragment_name": "SQLExecResult",
       "kind": "mutation",
@@ -8851,7 +8851,7 @@
           "type": "[Any]"
         }
       ],
-      "default_field": "querySQL",
+      "default_field": null,
       "document": "mutation querySQL($sql: String!, $args: [Any]) { querySQL(sql: $sql, args: $args) { ...SQLQueryResult } }\nfragment SQLQueryResult on SQLQueryResult { columns rows }",
       "fragment_name": "SQLQueryResult",
       "kind": "mutation",
@@ -10065,7 +10065,7 @@
           "type": "StashBoxInput!"
         }
       ],
-      "default_field": "validateStashBoxCredentials",
+      "default_field": null,
       "document": "query validateStashBoxCredentials($input: StashBoxInput!) { validateStashBoxCredentials(input: $input) { ...StashBoxValidationResult } }\nfragment StashBoxValidationResult on StashBoxValidationResult { valid status }",
       "fragment_name": "StashBoxValidationResult",
       "kind": "query",

@@ -86,13 +86,16 @@ def _default_field(
 ) -> str | None:
     result_definition = types.get(result_type or "", {})
     fields = result_definition.get("fields", []) or []
+    field_names = {field.get("name") for field in fields}
     if any(field.get("name") == "count" for field in fields):
         for field in fields:
             if _contains_kind(field.get("type", {}), "LIST"):
                 return field.get("name")
     if result_type and result_type.endswith("Result"):
         suffix = operation.removeprefix("find") or operation
-        return suffix[:1].lower() + suffix[1:]
+        candidate = suffix[:1].lower() + suffix[1:]
+        if candidate in field_names:
+            return candidate
     return None
 
 
