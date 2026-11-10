@@ -648,6 +648,18 @@
                     "name": "Float",
                     "ofType": null
                   }
+                },
+                {
+                  "defaultValue": null,
+                  "deprecationReason": null,
+                  "description": null,
+                  "isDeprecated": false,
+                  "name": "scene_filter",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SceneFilterType",
+                    "ofType": null
+                  }
                 }
               ],
               "deprecationReason": null,
@@ -3993,7 +4005,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "ID",
                   "ofType": null
                 }
               }
@@ -8021,6 +8033,30 @@
                   "ofType": null
                 }
               }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "initialUsername",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "initialPassword",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             }
           ],
           "interfaces": null,
@@ -8422,6 +8458,30 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "Float",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": "Maximum duration (in seconds) for generated marker preview videos. 0 disables the ceiling.",
+              "isDeprecated": false,
+              "name": "maxMarkerPreviewDuration",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": "Duration (in seconds) for marker preview videos without an explicit end time. Must be positive.",
+              "isDeprecated": false,
+              "name": "defaultMarkerPreviewDuration",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               }
             },
@@ -9313,6 +9373,38 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "Float",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Maximum duration (in seconds) for generated marker preview videos. 0 disables the ceiling.",
+              "isDeprecated": false,
+              "name": "maxMarkerPreviewDuration",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Duration (in seconds) for marker preview videos without an explicit end time. Must be positive.",
+              "isDeprecated": false,
+              "name": "defaultMarkerPreviewDuration",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
                   "ofType": null
                 }
               }
@@ -13394,6 +13486,30 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
+              "name": "scenes",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Scene",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
               "name": "created_at",
               "type": {
                 "kind": "NON_NULL",
@@ -13682,6 +13798,30 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
+              "name": "images",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Image",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
               "name": "created_at",
               "type": {
                 "kind": "NON_NULL",
@@ -13934,6 +14074,30 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "Fingerprint",
+                      "ofType": null
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "galleries",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Gallery",
                       "ofType": null
                     }
                   }
@@ -16426,6 +16590,18 @@
             {
               "defaultValue": null,
               "deprecationReason": null,
+              "description": "Filter by production date",
+              "isDeprecated": false,
+              "name": "production_date",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DateCriterionInput",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
               "description": "Filter by creation time",
               "isDeprecated": false,
               "name": "created_at",
@@ -18136,7 +18312,7 @@
               "name": "scene_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18148,7 +18324,7 @@
               "name": "image_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18160,7 +18336,7 @@
               "name": "gallery_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18172,7 +18348,7 @@
               "name": "performer_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18184,7 +18360,7 @@
               "name": "studio_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18196,7 +18372,7 @@
               "name": "movie_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18208,7 +18384,7 @@
               "name": "group_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -18220,7 +18396,7 @@
               "name": "marker_count",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "IntCriterionInput",
+                "name": "HierarchicalCountInput",
                 "ofType": null
               }
             },
@@ -19792,6 +19968,75 @@
           "isOneOf": false,
           "kind": "INPUT_OBJECT",
           "name": "IntCriterionInput",
+          "possibleTypes": null,
+          "specifiedByURL": null
+        },
+        {
+          "description": null,
+          "enumValues": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "value",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "value2",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "modifier",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "CriterionModifier",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": "Number of descendant levels to include. Negative values include all descendants.",
+              "isDeprecated": false,
+              "name": "depth",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            }
+          ],
+          "interfaces": null,
+          "isOneOf": false,
+          "kind": "INPUT_OBJECT",
+          "name": "HierarchicalCountInput",
           "possibleTypes": null,
           "specifiedByURL": null
         },
@@ -33393,6 +33638,18 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
+              "name": "production_date",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
               "name": "rating100",
               "type": {
                 "kind": "SCALAR",
@@ -34057,6 +34314,18 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
+              "name": "production_date",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
               "name": "rating100",
               "type": {
                 "kind": "SCALAR",
@@ -34379,6 +34648,18 @@
               "description": null,
               "isDeprecated": false,
               "name": "date",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "production_date",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -34828,6 +35109,18 @@
               "description": null,
               "isDeprecated": false,
               "name": "date",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "production_date",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -37880,6 +38173,18 @@
             {
               "args": [],
               "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "production_date",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
               "description": "This should be a base64 encoded data URL",
               "isDeprecated": false,
               "name": "image",
@@ -38137,6 +38442,18 @@
               "description": null,
               "isDeprecated": false,
               "name": "date",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "production_date",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -39401,6 +39718,22 @@
                   "ofType": null
                 }
               }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "submissions",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
             }
           ],
           "inputFields": null,
@@ -39446,6 +39779,26 @@
               "description": "Fields to exclude when executing the tagging",
               "isDeprecated": false,
               "name": "exclude_fields",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": "Collection fields to merge (add to existing) instead of overwriting when executing the tagging",
+              "isDeprecated": false,
+              "name": "merge_fields",
               "type": {
                 "kind": "LIST",
                 "name": null,
@@ -40697,10 +41050,68 @@
                   }
                 }
               ],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "scene_marker_count",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [
+                {
+                  "defaultValue": null,
+                  "deprecationReason": null,
+                  "description": null,
+                  "isDeprecated": false,
+                  "name": "depth",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                }
+              ],
               "deprecationReason": "use group_count instead",
               "description": null,
               "isDeprecated": true,
               "name": "movie_count",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [
+                {
+                  "defaultValue": null,
+                  "deprecationReason": null,
+                  "description": null,
+                  "isDeprecated": false,
+                  "name": "depth",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                }
+              ],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "o_counter",
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -40860,18 +41271,6 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
-              "name": "o_counter",
-              "type": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": null,
-              "isDeprecated": false,
               "name": "custom_fields",
               "type": {
                 "kind": "NON_NULL",
@@ -40955,6 +41354,26 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "child_ids",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
               }
             },
             {
@@ -41184,6 +41603,26 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              }
+            },
+            {
+              "defaultValue": null,
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "child_ids",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
               }
             },
             {

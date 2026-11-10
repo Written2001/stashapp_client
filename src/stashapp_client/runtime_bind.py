@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import copy
 from typing import Any
 
 import pandas as pd
@@ -176,8 +175,7 @@ def _augment_fragment(
     updated_selection = _augment_selection_set(
         fragment.selection_set, path, fragments, visited, add_leaf=False
     )
-    updated = copy.copy(fragment)
-    updated.selection_set = updated_selection
+    updated = _replace_node(fragment, selection_set=updated_selection)
     fragments[name] = updated
     return updated
 
@@ -206,8 +204,7 @@ def _augment_selection_set(
                     add_leaf=True,
                 )
                 if child is not selection.selection_set:
-                    updated = copy.copy(selection)
-                    updated.selection_set = child
+                    updated = _replace_node(selection, selection_set=child)
                     selections[index] = updated
                     changed = True
         elif isinstance(selection, FragmentSpreadNode):
@@ -221,10 +218,13 @@ def _augment_selection_set(
         selections.append(FieldNode(name=NameNode(value=target)))
         changed = True
     if changed:
-        updated_set = copy.copy(selection_set)
-        updated_set.selections = tuple(selections)
-        return updated_set
+        return _replace_node(selection_set, selections=tuple(selections))
     return selection_set
+
+
+def _replace_node(node: Any, **changes: Any) -> Any:
+    values = {name: changes.get(name, getattr(node, name)) for name in node.keys}
+    return type(node)(**values)
 
 
 def _selection_contains_path(

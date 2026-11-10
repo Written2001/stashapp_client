@@ -6,6 +6,15 @@ This project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-10
+
+- Updated schema and registry for compatibility with Stash v0.32.0.
+- Added `HierarchicalCountInput` type for hierarchical filtering support.
+- Updated operations `sceneGenerateScreenshot` and `findDuplicateScenes` to reflect new GraphQL signatures.
+- Extended and refined types including `Scene`, `Studio`, `SceneFilterType`, `TagFilterType`, and file types (`GalleryFile`, `ImageFile`, `VideoFile`).
+- Updated mutation inputs for scenes (`SceneCreateInput`, `SceneUpdateInput`, `BulkSceneUpdateInput`), studios (`StudioCreateInput`, `StudioUpdateInput`), and configuration (`ConfigGeneralInput`).
+- All changes generated from Stash commit 9e9ad972643320e737c711884f10e4285f0f3a88.
+
 ## [0.2.1] - 2026-09-06
 
 - Fixed default `*Create` and `*Update` mutation methods to return one-row
